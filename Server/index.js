@@ -2,9 +2,10 @@ const express = require('express')
 const cors = require('cors')
 const mysql = require('mysql')
 
- 
+//const tables = ['producto', 'usuarios']
 
 const app = express()
+
 const db = mysql.createPool({
     host: "localhost",
     user: "root",
@@ -13,6 +14,19 @@ const db = mysql.createPool({
     insecureAuth: "True"
 });
 
+/*tables.map(tabla =>{
+  const sqlCrear = 'CREATE TABLE IF NOT EXISTS [LaurelAppDB].?';
+  db.query(sqlCrear, tabla,
+    function(err,row,fields) { 
+         if(err) {
+           console.log(err);
+         }
+         else{
+             res.send("Tabla creada" , tabla)
+         }
+      });
+})*/
+
 app.use(cors());
 
 app.use(express.urlencoded({
@@ -20,6 +34,10 @@ app.use(express.urlencoded({
   }));
 app.use(express.json());
 
+app.use('/api/usuarios', require('../Server/rutas/usuarios'));
+app.use('/api/auth', require('../Server/rutas/auth'));
+app.use('/api/productos', require('../Server/rutas/productos'));
+/*
 app.post('/api/insertar', (req,res) => {
     const nombreProducto = req.body.nombreProducto
     const precioProducto = parseInt(req.body.precioProducto)
@@ -62,7 +80,7 @@ app.delete("/api/eliminarProducto/:id_producto", (req, res) => {
      });
 
 });
-
+*/
 app.listen(3001, () =>{
     console.log("running on port 3001")
 })

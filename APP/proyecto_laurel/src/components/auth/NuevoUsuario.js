@@ -1,7 +1,21 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Link} from 'react-router-dom';
+import Axios from "axios";
+
+import AlertaContext from '../../context/alertas/alertaContext'
 
 const NuevoUsuario = () => {
+
+
+    const agregarUsuario = () => {
+        Axios.post('http://localhost:3001/api/usuarios/crear', {nombreUsuario: usuario.nombre,  correoUsuario: usuario.email, contraseñaUsuario: usuario.contraseña}).then(() =>{
+            alert('Insertado correctamente');
+            mostrarAlerta('Su usuario ha sido creado exitosamente!','alerta-ok')
+        })
+    };
+    //extraer valores
+    const alertaContext = useContext(AlertaContext);
+    const {alerta, mostrarAlerta} = alertaContext;
 
     const [usuario, guardarUsuario] = useState({
         nombre: '',
@@ -21,17 +35,26 @@ const NuevoUsuario = () => {
 }
     const onSubmit = e => {
         e.preventDefault();
-
+        console.log("Entrando on sumit");
         //Validar campos vacios
+        if(nombre.trim() === '' || email.trim() === '' || contraseña.trim() === ''|| confirmar.trim() === ''){
+            mostrarAlerta('Todos los campos son obligatorios','alerta-error');
+            return;
+        }
 
+        //Password minimo de 6 caracteres
+        if(contraseña.length < 6)  mostrarAlerta('Contraseña debe ser minimo de 6 caracteres','alerta-error');
 
-        //Password minimo de 8 caracteres
 
         //Las 2 contraseñas iguales
-        //
-    }
+        if(contraseña !== confirmar)  mostrarAlerta('Ambas contraseñas deben ser iguales','alerta-error');
+        console.log("antes de agregarUsuario");
+
+        agregarUsuario();
+    };
     return(
         <div className="form-usuario">
+            {alerta ? (<div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div>) : null}
             <div className="contenedor-form sombra-dark">
                 <h1> Crear cuenta</h1>
             
@@ -64,8 +87,8 @@ const NuevoUsuario = () => {
                     <label htmlFor="PASSWORD"> Contraseña </label>
                     <input
                         type="PASSWORD"
-                        id="PASSWORD"
-                        name="PASSWORD"
+                        id="contraseña"
+                        name="contraseña"
                         placeholder="Tu contraseña"
                         value={contraseña}
                         onChange = {onChange}
@@ -85,7 +108,7 @@ const NuevoUsuario = () => {
                 </div>
             <div className="campo-form">
                 <input type="submit" className="btn-sesion btn-primario-sesion btn-block-sesion"
-                value="Crear Usuario"/>
+                value="Crear Usuario" onClick = {onSubmit}/>
             </div>
             </form>
             <Link to={'./'} className="enlace-cuenta">
