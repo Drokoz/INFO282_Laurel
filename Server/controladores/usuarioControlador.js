@@ -23,22 +23,29 @@ exports.crearUsuario = async (req,res) => {
         //guardar usuario
 
         const {nombreUsuario,correoUsuario,contraseñaUsuario} = await req.body
+        console.log(nombreUsuario,correoUsuario,contraseñaUsuario)
 
         db.query("SELECT * FROM `usuarios` WHERE `correo_usuario` = ?", correoUsuario, async function (err, result) {
             
             //Verificar que no se haya creado el usuario anteriormente
             if (err) throw err;
             let creado = false;
+
             if (result[0] != undefined){
                 result = Object.values(JSON.parse(JSON.stringify(result)));
+                console.log(result[0].correo_usuario, correoUsuario);
+
                 if (result[0].correo_usuario == correoUsuario){
+
                     creado = true;
                     }
                 } 
 
             //Si el usuario no está creado
             if (creado){
-                res.status(400).json({msg:"Usuario ya creado"})
+
+                res.status(400).json({msg:"Usuario ya creado"});
+
             }
             else{
                 console.log(typeof(contraseñaUsuario));
@@ -52,23 +59,22 @@ exports.crearUsuario = async (req,res) => {
                             console.log(err);
                             }
                             else{
-                                res.json({msg:"Usuario creado correctamente"})
+                                const payload = {
+                                    usuario:{
+                                        email: correoUsuario
+                                    }
+                                }
+                                jwt.sign(payload, 'MpSuFpDbYaUhMvCw',{
+                                    expiresIn: 14400
+                                }, (error,token) => {
+                                    if(error) throw error;
+                                    res.json({token: token});
+                                })
+                                
                             }
-                        });
+                    });
                           //Crear y firmar token
 
-          const payload = {
-            usuario:{
-                email: correoUsuario
-            }
-          }
-          
-          jwt.sign(payload, 'MpSuFpDbYaUhMvCw',{
-            expiresIn: 14400
-        }, (error,token) => {
-            if(error) throw error;
-            res.json({token: token});
-        })
             }
           });
     

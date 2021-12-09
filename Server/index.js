@@ -5,7 +5,9 @@ const mysql = require('mysql')
 //const tables = ['producto', 'usuarios']
 
 const app = express()
+app.use(cors());
 
+/*
 const db = mysql.createPool({
     host: "localhost",
     user: "root",
@@ -14,7 +16,7 @@ const db = mysql.createPool({
     insecureAuth: "True"
 });
 
-/*tables.map(tabla =>{
+tables.map(tabla =>{
   const sqlCrear = 'CREATE TABLE IF NOT EXISTS [LaurelAppDB].?';
   db.query(sqlCrear, tabla,
     function(err,row,fields) { 
@@ -27,7 +29,7 @@ const db = mysql.createPool({
       });
 })*/
 
-app.use(cors());
+
 
 app.use(express.urlencoded({
     extended: true

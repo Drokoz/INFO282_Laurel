@@ -1,20 +1,27 @@
-import { React } from "react";
+import React, {useContext, useEffect} from "react";
 import { Link } from "react-router-dom";
+import AuthContext from "../context/autentificacion/authContext";
 const Header = () => {
+
+    const authContext =useContext(AuthContext);
+    const {cerrarSesion} = authContext;
+
     return ( 
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary
         justify-content-between">
             <div className="container">
                 <h1>
-                    <Link to={'/'} className="text-light">
+                    <Link to={'/productos/listado'} className="text-light">
                     Productos
                     </Link>
                 </h1>
             </div>
-
-            <Link to={"/productos/nuevo"}
-                className="btn btn-danger nuevo-post d-block d-md-inline-block"
-            >Agregar Productos &#43;</Link>
+            
+            <button
+                className="btn btn-danger nuevo-post d-block"
+                onClick ={() => cerrarSesion()}
+            >Cerrar Sesión
+            </button>
         </nav>
      );
 }

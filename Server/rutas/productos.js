@@ -3,7 +3,7 @@ const {check} = require('express-validator');
 const router = express.Router();
 const productoControlador = require('../controladores/productosControlador')
 const auth = require('../middleware/auth')
-//crear usuarios
+// /api/productos
 
 router.post('/nuevo',
 [

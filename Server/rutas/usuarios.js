@@ -2,6 +2,7 @@ const express = require('express');
 const {check} = require('express-validator');
 const router = express.Router();
 const usuarioControlador = require('../controladores/usuarioControlador')
+
 //crear usuarios
 
 router.post('/crear',

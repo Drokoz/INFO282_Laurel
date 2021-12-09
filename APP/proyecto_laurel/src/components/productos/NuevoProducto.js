@@ -1,23 +1,26 @@
 import React, {useState} from 'react';
-import Axios from "axios";
-
-
-
+import clienteAxios from '../../config/axios';
+import Header from '../Header';
 const NuevoProducto = () => {
     const [nombreProducto, setNombreProducto] = useState("");
     const [precioProducto, setPrecioProducto] = useState("");
+    const [categoriaProducto, setCategoriaProducto] = useState("");
 
     const agregarProducto = () => {
-        Axios.post('http://localhost:3001/api/productos/insertar', {nombreProducto: nombreProducto, precioProducto: precioProducto}).then(() =>{
+        clienteAxios.post('api/productos/nuevo', {nombreProducto: nombreProducto, precioProducto: precioProducto, categoriaProducto: categoriaProducto}).then(() =>{
             alert('Insertado correctamente');
         })
     };
-    return ( 
+    return (
+        
+        <div>
+            <h1><Header></Header></h1>
         <div className="row justify-content-center">
+            
             <div className="card">
                 <div className="card-body">
-                    <h2 className="text-center mb-4 font-weogjt-bold">
-                        NuevoProducto
+                    <h2 className="text-center mb-4 font-weight-bold">
+                        Nuevo Producto
                     </h2>
                     <form>
                         <div className="form-group">
@@ -44,6 +47,18 @@ const NuevoProducto = () => {
                                 }}
                             />
                         </div>
+                        <div className="form-group">
+                            <label> Categoria Producto</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Categoria Producto"
+                                name="Categoria"
+                                onChange = {(e) => {
+                                    setCategoriaProducto(e.target.value)
+                                }}
+                            />
+                        </div>
                         <button
                             type="submit"
                             className="btn btn-primary font-weight-bold text-uppercase
@@ -53,6 +68,7 @@ const NuevoProducto = () => {
                     </form>
                 </div>
             </div>
+        </div>
         </div>
      );
 }

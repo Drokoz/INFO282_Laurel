@@ -1,21 +1,35 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
-import Axios from "axios";
-
 import AlertaContext from '../../context/alertas/alertaContext'
+import AuthContext from '../../context/autentificacion/authContext'
 
-const NuevoUsuario = () => {
 
+const NuevoUsuario = (props) => {
 
+/*
     const agregarUsuario = () => {
         Axios.post('http://localhost:3001/api/usuarios/crear', {nombreUsuario: usuario.nombre,  correoUsuario: usuario.email, contraseñaUsuario: usuario.contraseña}).then(() =>{
             alert('Insertado correctamente');
             mostrarAlerta('Su usuario ha sido creado exitosamente!','alerta-ok')
         })
-    };
+    };*/
     //extraer valores
     const alertaContext = useContext(AlertaContext);
     const {alerta, mostrarAlerta} = alertaContext;
+    const authContext = useContext(AuthContext);
+    const {mensaje, autenticado, registrarUsuario} = authContext;
+
+    useEffect( () => {
+        if(autenticado){
+        
+            props.history.push('/productos/listado');
+            
+        }
+
+        if(mensaje){
+            mostrarAlerta(mensaje.msg, mensaje.categoria);
+        }
+    }, [mensaje, autenticado, props.history])
 
     const [usuario, guardarUsuario] = useState({
         nombre: '',
@@ -35,7 +49,6 @@ const NuevoUsuario = () => {
 }
     const onSubmit = e => {
         e.preventDefault();
-        console.log("Entrando on sumit");
         //Validar campos vacios
         if(nombre.trim() === '' || email.trim() === '' || contraseña.trim() === ''|| confirmar.trim() === ''){
             mostrarAlerta('Todos los campos son obligatorios','alerta-error');
@@ -43,14 +56,22 @@ const NuevoUsuario = () => {
         }
 
         //Password minimo de 6 caracteres
-        if(contraseña.length < 6)  mostrarAlerta('Contraseña debe ser minimo de 6 caracteres','alerta-error');
+        if(contraseña.length < 6) {
+            mostrarAlerta('Contraseña debe ser minimo de 6 caracteres','alerta-error');
+            return;}
 
 
         //Las 2 contraseñas iguales
-        if(contraseña !== confirmar)  mostrarAlerta('Ambas contraseñas deben ser iguales','alerta-error');
-        console.log("antes de agregarUsuario");
-
-        agregarUsuario();
+        if(contraseña !== confirmar) {
+            mostrarAlerta('Ambas contraseñas deben ser iguales','alerta-error');
+            return;
+        }
+        registrarUsuario({
+            nombreUsuario: usuario.nombre, 
+            correoUsuario: usuario.email,
+            contraseñaUsuario: usuario.contraseña
+        })
+        //agregarUsuario();
     };
     return(
         <div className="form-usuario">

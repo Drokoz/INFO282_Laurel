@@ -1,7 +1,15 @@
-import React, {useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
+import AlertaContext from '../../context/alertas/alertaContext'
+import AuthContext from '../../context/autentificacion/authContext'
 
-const InicioSesion = () => {
+const InicioSesion = (props) => {
+
+        //extraer valores
+    const alertaContext = useContext(AlertaContext);
+    const {alerta, mostrarAlerta} = alertaContext;
+    const authContext = useContext(AuthContext);
+    const {mensaje, autenticado, iniciarSesion} = authContext;
 
     const [usuario, guardarUsuario] = useState({
         email: '',
@@ -21,11 +29,29 @@ const InicioSesion = () => {
         e.preventDefault();
 
         //Validar campos vacios
+        if(email.trim() === '' || contraseña.trim() === ''){
+            mostrarAlerta('Todos los campos son obligatorios','alerta-error');
+            return;
+        }
 
+        iniciarSesion({correoUsuario:email,contraseñaUsuario:contraseña});
         //
     }
+    //PASSWORD O USUARIO NO EXISTA
+    useEffect( () => {
+        if(autenticado){
+        
+            props.history.push('/productos/listado');
+            
+        }
+
+        if(mensaje){
+            mostrarAlerta(mensaje.msg, mensaje.categoria);
+        }
+    }, [mensaje, autenticado, props.history])
     return(
         <div className="form-usuario">
+            {alerta ? (<div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div>) : null}
             <div className="contenedor-form sombra-dark">
                 <h1> Iniciar Sesión</h1>
 
@@ -46,8 +72,8 @@ const InicioSesion = () => {
                     <label htmlFor="PASSWORD"> Contraseña </label>
                     <input
                         type="PASSWORD"
-                        id="PASSWORD"
-                        name="PASSWORD"
+                        id="contraseña"
+                        name="contraseña"
                         placeholder="Tu contraseña"
                         value={contraseña}
                         onChange = {onChange}
@@ -56,7 +82,7 @@ const InicioSesion = () => {
 
                 <div className="campo-form">
                     <input type="submit" className="btn-sesion btn-primario-sesion btn-block-sesion"
-                    value="Iniciar Sesión"/>
+                    value="Iniciar Sesión" onClick={onSubmit}/>
                 </div>
             </form>
             <Link to={'./usuario/nuevo'} className="enlace-cuenta">

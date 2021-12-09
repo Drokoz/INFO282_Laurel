@@ -1,9 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import Axios from "axios";
+import clienteAxios from '../../config/axios';
+
 
 const eliminarProducto = (id_producto) => {
-    Axios.delete(`http://localhost:3001/api/eliminarProducto/${id_producto}`);
+    clienteAxios.delete(`/api/productos/eliminar/${id_producto}`);
 }
 const Producto = ({producto}) => {
     const {idproducto, nombre_producto, precio_producto, categoria_producto} = producto
