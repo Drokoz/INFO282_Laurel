@@ -1,27 +1,31 @@
 import React, {Fragment, useEffect, useState, useContext} from 'react';
-import Producto from './Producto'
-import clienteAxios from '../../config/axios';
-import Header from '../Header';
-import AuthContext from '../../context/autentificacion/authContext';
 import { Link } from "react-router-dom";
-const Productos = () => {
-    //Extraer la información de autentificacion
 
+//Componentes
+import Producto from './Producto'
+import Header from '../Header';
+
+//Context
+import ProductosContext from '../../context/productos/productosContext';
+import AuthContext from '../../context/autentificacion/authContext';
+
+
+const Productos = () => {
+
+    //Extraer la información de autentificacion
     const authContext = useContext(AuthContext);
     const {usuarioAutenticado} = authContext;
 
-    const [productoList, setProductoList] = useState([]);
+    //Extraer productos
+    const productosContext = useContext(ProductosContext);
+    const {productos, obtenerProductos} = productosContext;
+
+ 
+
     useEffect( () => {
-        
-        const getProductos = () => {
-            clienteAxios.get("/api/productos/obtener").then((response) => {
-                setProductoList(response.data);
-            });
-          };
+        obtenerProductos();
         usuarioAutenticado();
-        getProductos();
-        setProductoList(productoList.sort((producto_a, producto_b) => producto_a.categoria_producto.localeCompare(producto_b)))
-    },[productoList]);
+    },[]);
     return (
         
         <Fragment>
@@ -47,8 +51,8 @@ const Productos = () => {
                     
                 </thead>
                 <tbody>
-                    {productoList === 0 ? "No hay productos" : (
-                        productoList.map(producto => (
+                    {productos === 0 ? "No hay productos" : (
+                        productos.map(producto => (
                             <Producto
                                 key={producto.idproducto}
                                 producto={producto}

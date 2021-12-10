@@ -11,7 +11,7 @@ import AlertaState from './context/alertas/alertaState';
 import AuthState from './context/autentificacion/authState';
 import tokenAuth from './config/token';
 import RutaPrivada from './components/rutas/RutaPrivada';
-
+import ProductoState from './context/productos/productosState';
 
 // Revisar Token
 const token = localStorage.getItem('token');
@@ -20,23 +20,25 @@ if (token){
 }
 function App() {
   return (
-    <AlertaState>
-      <AuthState> 
-      <Router>
-          <Switch>
-            <Route exact path="/" component={InicioSesion} />
-            <Route exact path="/usuario/nuevo" component={NuevoUsuario} />
+    <ProductoState>
+      <AlertaState>
+        <AuthState> 
+          <Router>
+              <Switch>
+                <Route exact path="/" component={InicioSesion} />
+                <Route exact path="/usuario/nuevo" component={NuevoUsuario} />
 
-            <RutaPrivada exact path="/productos/listado" component={ListadoProductos} />
-            <RutaPrivada exact path="/productos/nuevo" component={NuevoProducto} />
-            <RutaPrivada exact path="/productos/editar" component={EditarProducto} />
-            <RutaPrivada exact path="/productos/eliminar" component={EliminarProducto} />
+                <RutaPrivada exact path="/productos/listado" component={ListadoProductos} />
+                <RutaPrivada exact path="/productos/nuevo" component={NuevoProducto} />
+                <RutaPrivada exact path="/productos/editar" component={EditarProducto} />
+                <RutaPrivada exact path="/productos/eliminar" component={EliminarProducto} />
 
-            
-          </Switch>
-      </Router>
-      </AuthState>
-    </AlertaState>
+                
+              </Switch>
+          </Router>
+        </AuthState>
+      </AlertaState>
+    </ProductoState>
   );
 }
 

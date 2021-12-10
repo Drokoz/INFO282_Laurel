@@ -6,13 +6,7 @@ import AuthContext from '../../context/autentificacion/authContext'
 
 const NuevoUsuario = (props) => {
 
-/*
-    const agregarUsuario = () => {
-        Axios.post('http://localhost:3001/api/usuarios/crear', {nombreUsuario: usuario.nombre,  correoUsuario: usuario.email, contraseñaUsuario: usuario.contraseña}).then(() =>{
-            alert('Insertado correctamente');
-            mostrarAlerta('Su usuario ha sido creado exitosamente!','alerta-ok')
-        })
-    };*/
+
     //extraer valores
     const alertaContext = useContext(AlertaContext);
     const {alerta, mostrarAlerta} = alertaContext;
@@ -132,7 +126,7 @@ const NuevoUsuario = (props) => {
                 value="Crear Usuario" onClick = {onSubmit}/>
             </div>
             </form>
-            <Link to={'./'} className="enlace-cuenta">
+            <Link to={'/'} className="enlace-cuenta">
                 Iniciar Sesión
             </Link>
             </div>

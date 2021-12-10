@@ -54,9 +54,10 @@ exports.obtenerProductos = (req, res) => {
       database: "LaurelAppDB",
       insecureAuth: "True"
   });
-  
-  
-    const id = req.params.id_producto;
+    console.log("DESDE ELIMINAR PRODUCTO")
+    console.log(req.params)
+    const id = req.params.id;
+    console.log(id);
     const sqlDelete = "DELETE FROM producto WHERE idproducto = (?);"
     db.query(sqlDelete, [id],
     function(err,row,fields) { 

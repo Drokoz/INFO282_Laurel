@@ -6,7 +6,14 @@ const NuevoProducto = () => {
     const [precioProducto, setPrecioProducto] = useState("");
     const [categoriaProducto, setCategoriaProducto] = useState("");
 
-    const agregarProducto = () => {
+
+    const agregarProducto = e => {
+
+        e.preventDefault();
+
+        //Validar
+
+        //A
         clienteAxios.post('api/productos/nuevo', {nombreProducto: nombreProducto, precioProducto: precioProducto, categoriaProducto: categoriaProducto}).then(() =>{
             alert('Insertado correctamente');
         })

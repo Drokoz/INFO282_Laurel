@@ -1,13 +1,14 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Link} from 'react-router-dom';
-import clienteAxios from '../../config/axios';
 
+//Context
+import ProductosContext from '../../context/productos/productosContext';
 
-const eliminarProducto = (id_producto) => {
-    clienteAxios.delete(`/api/productos/eliminar/${id_producto}`);
-}
 const Producto = ({producto}) => {
     const {idproducto, nombre_producto, precio_producto, categoria_producto} = producto
+    //Extraer productos
+    const productosContext = useContext(ProductosContext);
+    const {eliminarProducto} = productosContext;
     return ( 
         <tr>
             <td>{nombre_producto}</td>
