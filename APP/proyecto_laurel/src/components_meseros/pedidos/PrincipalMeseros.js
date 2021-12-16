@@ -17,7 +17,6 @@ const PrincipalMeseros = () => {
         <div className='contenedor-app'>
             <SideBar/>
             <div className='seccion-principal'>
-                <Header/>
                 <main>
                     <NuevoPedido/>
                     <div className='contenedor-tareas'>

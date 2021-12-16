@@ -7,11 +7,10 @@ const Header = () => {
     const {cerrarSesion} = authContext;
 
     return ( 
-        <nav className="navbar navbar-expand-lg navbar-dark bg-primary
-        justify-content-between">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container">
                 <h1>
-                    <Link to={'/productos/listado'} className="text-light">
+                    <Link to={'/productos/listado'} className="text-dark">
                     Productos
                     </Link>
                 </h1>

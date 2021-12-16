@@ -4,7 +4,7 @@ const NuevoPedido = () => {
     return ( 
         <div className='formulario'>
             <form>
-                <div className='contenedor-imput'>
+                <div className='contenedor-input'>
                     <input
                         type="number"
                         placeholder="Cantidad"
@@ -22,7 +22,7 @@ const NuevoPedido = () => {
                     />
                              
                 </div>
-                <div className='contenedor-imput'>
+                <div className='contenedor-input'>
                     <input
                         type="sumbit"
                         className="btn btn-primario btn-submit btn-block"

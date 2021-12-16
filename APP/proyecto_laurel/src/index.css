@@ -50,6 +50,7 @@ h1 a.text-light:hover {
 @media (min-width: 768px) {
   .navbar .btn {
     flex: 0 1 auto;
+    background-color: #b4f0b4;
   }
 }
 .acciones {
@@ -78,11 +79,12 @@ h1 a.text-light:hover {
   }
 
   aside {
-    background-color: var(--gris1);
+    background-color: #caf8cc;
     flex: 0 0 300px;
   }
   .seccion-principal {
     flex: 1;
+    background-color: #fffef5;
   }
 }
 
@@ -166,6 +168,11 @@ aside {
   color: var(--blanco);
 }
 
+.container {
+  background-color: #fafab6;
+  color: var(--blanco);
+}
+
 /** BOTONES **/
 .btn {
   margin-top: 2rem;
@@ -180,6 +187,7 @@ aside {
 .btn:hover {
   cursor: pointer;
 }
+
 .btn-primario {
   background-color: var(--gris2);
   color: var(--blanco);
@@ -195,7 +203,7 @@ aside {
   width: 100%;
 }
 .btn-submit:hover {
-  background-color: var(--gris2);
+  background-color: #faf9a7;
 }
 .btn-blank {
   margin: 0;
@@ -247,7 +255,7 @@ aside {
 
 /** Formulario crear y editar tareas **/
 .formulario {
-  background-color: var(--gris3);
+  background-color: #fffdeb;
   padding: 4rem;
 }
 .formulario form {
@@ -277,4 +285,9 @@ aside {
 .listado-tareas {
   max-width: 600px;
   margin: 0 auto;
+}
+
+.text-dark {
+  color: #000000;
+  text-decoration: none;
 }
