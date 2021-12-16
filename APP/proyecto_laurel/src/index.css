@@ -71,7 +71,40 @@ h1 a.text-light:hover {
   align-items: center;
   justify-content: center;
 }
+@media (min-width: 768px) {
+  .contenedor-app {
+    display: flex;
+    min-height: 100vh;
+  }
 
+  aside {
+    background-color: var(--gris1);
+    flex: 0 0 300px;
+  }
+  .seccion-principal {
+    flex: 1;
+  }
+}
+
+/* BARRA LATERAL */
+aside {
+  padding: 3rem;
+}
+
+.formulario-nuevo-proyecto {
+  margin-top: 6rem;
+}
+.formulario-nuevo-proyecto .input-text {
+  border-bottom: 1px solid var(--gris2);
+  border-radius: 0;
+  background-color: var(--gris1);
+}
+.formulario-nuevo-proyecto .input-text::placeholder {
+  color: var(--gris2);
+}
+.proyectos {
+  margin-top: 10rem;
+}
 .contenedor-form {
   padding: 5rem 3rem;
   max-width: 500px;
@@ -133,6 +166,43 @@ h1 a.text-light:hover {
   color: var(--blanco);
 }
 
+/** BOTONES **/
+.btn {
+  margin-top: 2rem;
+  font-family: var(--headingFont);
+  padding: 1.5rem;
+  font-size: 1.4;
+  font-weight: 400;
+  border-radius: 0.5rem;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+.btn:hover {
+  cursor: pointer;
+}
+.btn-primario {
+  background-color: var(--gris2);
+  color: var(--blanco);
+}
+.btn-primario:hover {
+  background: var(--gris3);
+}
+.btn-secundario {
+  background-color: var(--gris1);
+}
+.btn-block {
+  display: block;
+  width: 100%;
+}
+.btn-submit:hover {
+  background-color: var(--gris2);
+}
+.btn-blank {
+  margin: 0;
+  padding: 0;
+  display: block;
+  background-color: transparent;
+}
 .btn-block-sesion {
   display: block;
   width: 100%;
@@ -173,4 +243,38 @@ h1 a.text-light:hover {
 .alerta-error {
   background-color: rgb(230, 78, 78);
   color: #ffffff;
+}
+
+/** Formulario crear y editar tareas **/
+.formulario {
+  background-color: var(--gris3);
+  padding: 4rem;
+}
+.formulario form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.contenedor-input {
+  display: flex;
+}
+.contenedor-input label {
+  margin-bottom: 1rem;
+  color: var(--blanco);
+}
+.input-text {
+  padding: 1rem;
+  border: 12rem;
+  border-radius: 1rem;
+  flex: 1;
+  width: 90%;
+}
+
+/** TAREAS LISTADO **/
+.contenedor-tareas {
+  padding: 4rem;
+}
+
+.listado-tareas {
+  max-width: 600px;
+  margin: 0 auto;
 }

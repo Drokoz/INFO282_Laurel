@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 //Componentes
 import Producto from './Producto'
-import Header from '../Header';
-
+import Header from '../navegacion/Header';
+import SideBar from '../navegacion/Sidebar';
 //Context
 import ProductosContext from '../../context/productos/productosContext';
 import AuthContext from '../../context/autentificacion/authContext';
@@ -27,13 +27,16 @@ const Productos = () => {
         usuarioAutenticado();
     },[]);
     return (
-        
+        <div>
         <Fragment>
+           
             <h1><Header></Header></h1>
+            
             <h2 className="text-center my-5">
                 Listado de Productos
                 
             </h2>
+            
             <Link to={"/productos/nuevo"}
                             className="btn btn-danger nuevo-post d-block d-md-inline-block float-right"
                             >Agregar Productos
@@ -62,7 +65,7 @@ const Productos = () => {
                 </tbody>
             </table>
         </Fragment>
-        
+        </div>
      );
 }
  

@@ -2,9 +2,15 @@ import React, {useContext, useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import AlertaContext from '../../context/alertas/alertaContext'
 import AuthContext from '../../context/autentificacion/authContext'
+import 'bootstrap/dist/css/bootstrap.css';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown'
+/*
+<button class="dropdown-item" id="tipo_usuario_1" type="button" name='tipo_usuario' value={'administrador'} onSelect={onSelect}>Administrador</button>
+<button class="dropdown-item" id="tipo_usuario_1" type="button" name='tipo_usuario' value={'mesero'} onSelect={onSelect}>Mesero</button>
+*/
 
-
-const NuevoUsuario = (props) => {
+const NuevoUsuarioAdmin = (props) => {
 
 
     //extraer valores
@@ -30,18 +36,29 @@ const NuevoUsuario = (props) => {
         nombre: '',
         email: '',
         contraseña: '',
-        confirmar: ''
+        confirmar: '',
+        tipo_usuario:'Tipo de usuario'
     });
 
 
-    const {nombre, email, contraseña, confirmar} = usuario;
+    const {nombre, email, contraseña, confirmar, tipo_usuario} = usuario;
 
     const onChange = e => {
         guardarUsuario({
             ...usuario,
             [e.target.name] : e.target.value
-    })
-}
+        }); 
+    }
+
+    const onSelect = (eventKey,e) => {
+        
+        console.log(e.target.name, eventKey)
+        guardarUsuario({
+            ...usuario,
+            [e.target.name] : eventKey
+        }); 
+    }
+    
     const onSubmit = e => {
         e.preventDefault();
         //Validar campos vacios
@@ -122,6 +139,18 @@ const NuevoUsuario = (props) => {
                         onChange = {onChange}
                     />
                 </div>
+                <div className="campo-form">
+                    <label htmlFor="confirmar"> Tipo de usuario </label>
+                    <DropdownButton
+                        alignRight
+                        title={usuario.tipo_usuario}
+                        id="dropdown-menu-align-right"
+                        onSelect={onSelect}
+                        >
+                        <Dropdown.Item eventKey="administrador" name='tipo_usuario'>Administrador</Dropdown.Item>
+                        <Dropdown.Item eventKey="mesero" name='tipo_usuario'>Mesero</Dropdown.Item>
+                    </DropdownButton>
+                </div>
             <div className="campo-form">
                 <input type="submit" className="btn-sesion btn-primario-sesion btn-block-sesion"
                 value="Crear Usuario" onClick = {onSubmit}/>
@@ -135,4 +164,4 @@ const NuevoUsuario = (props) => {
     );
 }
 
-export default NuevoUsuario;
+export default NuevoUsuarioAdmin;

@@ -1,5 +1,5 @@
 
-import Producto from '../../components/productos/Producto'
+
 import {OBTENER_PRODUCTO, ELIMINAR_PRODUCTO} from '../../types/index'
 
 
@@ -12,7 +12,7 @@ export default (state, action) =>{
                 productos: action.payload.sort((producto_A, producto_B) => {
                     const categoria_1 = producto_A.categoria_producto.toLowerCase();
                     const categoria_2 = producto_B.categoria_producto.toLowerCase();
-                    if (categoria_1 == categoria_2) {
+                    if (categoria_1 === categoria_2) {
                         return 0;
                       }
                     if (categoria_1 < categoria_2) {

@@ -12,7 +12,8 @@ import AuthState from './context/autentificacion/authState';
 import tokenAuth from './config/token';
 import RutaPrivada from './components/rutas/RutaPrivada';
 import ProductoState from './context/productos/productosState';
-
+import NuevoUsuarioAdmin from './components_administrador/auth/NuevoUsuarioAdmin';
+import PrincipalMeseros from './components_meseros/pedidos/PrincipalMeseros';
 // Revisar Token
 const token = localStorage.getItem('token');
 if (token){
@@ -27,7 +28,8 @@ function App() {
               <Switch>
                 <Route exact path="/" component={InicioSesion} />
                 <Route exact path="/usuario/nuevo" component={NuevoUsuario} />
-
+                <Route exact path="/admin/usuario/nuevo"component={NuevoUsuarioAdmin} />
+                <Route exact path="/meseros/pedidos/menu"component={PrincipalMeseros} />
                 <RutaPrivada exact path="/productos/listado" component={ListadoProductos} />
                 <RutaPrivada exact path="/productos/nuevo" component={NuevoProducto} />
                 <RutaPrivada exact path="/productos/editar" component={EditarProducto} />

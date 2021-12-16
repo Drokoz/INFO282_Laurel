@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer} from 'react';
 import productosContext from './productosContext'
 import productosReducer from './productosReducer';
 import {OBTENER_PRODUCTO, ELIMINAR_PRODUCTO} from '../../types/index'
@@ -9,7 +9,7 @@ import clienteAxios from '../../config/axios';
 const ProductoState = props =>{
     const initialState ={
         productos: [],
-        inicio:false
+        formulario:false
     }
 
     const [state, dispatch] = useReducer(productosReducer,initialState);
@@ -33,11 +33,23 @@ const ProductoState = props =>{
         }
 
     }
+    //Agregar Producto
 
+    const agregarProducto = async (producto) => {
+        //Extraer informacion de producto
+        const {nombreProducto,precioProducto, categoriaProducto} = producto
+        try {
+            await clienteAxios.post('api/productos/nuevo', {nombreProducto: nombreProducto, precioProducto: precioProducto, categoriaProducto: categoriaProducto});
+            
+        } catch (error) {
+            console.log(error)
+            
+        }
+    }
     //Elimina Producto
     const eliminarProducto = async (idproducto) => {
         try {
-            const respuesta = await clienteAxios.delete(`/api/productos/eliminar/${idproducto}`);
+            await clienteAxios.delete(`/api/productos/eliminar/${idproducto}`);
             dispatch({
                 type: ELIMINAR_PRODUCTO,
                 payload: idproducto
@@ -50,8 +62,10 @@ const ProductoState = props =>{
     return(
         <productosContext.Provider
             value={{
+                formulario: state.formulario,
                 productos: state.productos,
                 obtenerProductos,
+                agregarProducto,
                 eliminarProducto
             }}
         >

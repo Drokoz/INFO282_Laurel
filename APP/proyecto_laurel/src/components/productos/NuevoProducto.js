@@ -1,22 +1,37 @@
-import React, {useState} from 'react';
-import clienteAxios from '../../config/axios';
-import Header from '../Header';
+import React, {useState, useContext} from 'react';
+import Header from '../navegacion/Header';
+import ProductosContext from '../../context/productos/productosContext';
+
 const NuevoProducto = () => {
     const [nombreProducto, setNombreProducto] = useState("");
     const [precioProducto, setPrecioProducto] = useState("");
     const [categoriaProducto, setCategoriaProducto] = useState("");
 
+    //Extraer productos
+    const productosContext = useContext(ProductosContext);
+    const {agregarProducto} = productosContext;
 
-    const agregarProducto = e => {
+    const onClickProducto = e => {
 
         e.preventDefault();
 
         //Validar
+        if(nombreProducto.trim() === '' || precioProducto.trim() === '' || categoriaProducto.trim() === ''){
+            return;
+        };
 
-        //A
-        clienteAxios.post('api/productos/nuevo', {nombreProducto: nombreProducto, precioProducto: precioProducto, categoriaProducto: categoriaProducto}).then(() =>{
-            alert('Insertado correctamente');
-        })
+        //Pasar a state
+
+        agregarProducto({nombreProducto: nombreProducto,
+            precioProducto: precioProducto,
+            categoriaProducto: categoriaProducto});
+        
+        
+        //Reiniciar formulario
+        setNombreProducto('');
+        setPrecioProducto('');
+        setCategoriaProducto('');
+
     };
     return (
         
@@ -37,6 +52,7 @@ const NuevoProducto = () => {
                                 className="form-control"
                                 placeholder="Nombre Producto"
                                 name="Nombre"
+                                value={nombreProducto}
                                 onChange = {(e) => {
                                     setNombreProducto(e.target.value)
                                 }}
@@ -49,6 +65,7 @@ const NuevoProducto = () => {
                                 className="form-control"
                                 placeholder="Precio Producto"
                                 name="Precio"
+                                value={precioProducto}
                                 onChange = {(e) => {
                                     setPrecioProducto(e.target.value)
                                 }}
@@ -61,6 +78,7 @@ const NuevoProducto = () => {
                                 className="form-control"
                                 placeholder="Categoria Producto"
                                 name="Categoria"
+                                value={categoriaProducto}
                                 onChange = {(e) => {
                                     setCategoriaProducto(e.target.value)
                                 }}
@@ -70,7 +88,7 @@ const NuevoProducto = () => {
                             type="submit"
                             className="btn btn-primary font-weight-bold text-uppercase
                             d-block w-100"
-                            onClick={agregarProducto}
+                            onClick={onClickProducto}
                         >Agregar</button>
                     </form>
                 </div>
