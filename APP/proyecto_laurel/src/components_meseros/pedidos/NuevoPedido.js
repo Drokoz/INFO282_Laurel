@@ -20,16 +20,19 @@ const NuevoPedido = () => {
                         placeholder="Comentarios"
                         name="Comentarios"
                     />
+
                              
                 </div>
                 <div className='contenedor-input'>
-                    <input
+                    <button
                         type="sumbit"
-                        className="btn btn-primario btn-submit btn-block"
+                        
+                        className="button btn-primario btn-submit btn-block"
                         value="Agregar Pedido"
-                    />  
+                      >Agregar pedido </button>
                 </div>
             </form>
+           
         </div>
      );
 }
