@@ -6,8 +6,9 @@ import {OBTENER_PRODUCTO, ELIMINAR_PRODUCTO} from '../../types/index'
 //Extras
 import clienteAxios from '../../config/axios';
 
-const ProductoState = props =>{
-    const initialState ={
+const ProductoState = props => {
+    
+    const initialState = {
         productos: [],
         formulario:false
     }

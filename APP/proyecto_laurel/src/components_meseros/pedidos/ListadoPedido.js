@@ -1,21 +1,28 @@
-import React, {Fragment} from 'react';
+import React, {Fragment,useState, useContext, useEffect, useReducer} from 'react';
 
 //Componentes
 import Producto from './ProductoPedido'
 
+//Context
+import PedidoContext from '../../context/pedidos/pedidoContext';
+import MesaContext from '../../context/mesas/mesaContext';
+
 const ListadoPedido = () => {
-    const productosPedidos = [
-        {id: 0, cantidad:2,nombre:'Confit de pato',precio:13500, comentarios:''},
-        {id: 1, cantidad:2,nombre:'Sorrentino Berenjena',precio:9500,comentarios:''},
-        {id: 2, cantidad:1,nombre:'Filete',precio:14500,comentarios:''},
-        {id: 3, cantidad:3,nombre:'Trucha',precio:13000,comentarios:''}
-    ]
+
+    const pedidoContext = useContext(PedidoContext);
+    const {obtenerProductosPedido, pedido} = pedidoContext;
+
+    const mesaContext = useContext(MesaContext);
+    const {mesa, obtenerMesaActual} = mesaContext;
+
+    useEffect( () => {
+        obtenerProductosPedido();   
+    },[]);
     return ( 
-        <div>
         <Fragment>
             
             <h2 className="text-center my-5">
-                Pedido
+                Pedido {mesa}
             </h2>
     
             <table className="table table-striped">
@@ -30,10 +37,10 @@ const ListadoPedido = () => {
                     
                 </thead>
                 <tbody>
-                    {productosPedidos.lenght === 0 ? "No hay productos" : (
-                        productosPedidos.map(producto => (
+                    {pedido.lenght === 0 ? "No hay productos" : (
+                        pedido.map(producto => (
                             <Producto
-                                key={producto.id}
+                                key={producto.idProducto}
                                 producto={producto}
                             />
                         ))
@@ -41,7 +48,7 @@ const ListadoPedido = () => {
                 </tbody>
             </table>
         </Fragment>
-        </div>
+
      );
 }
  

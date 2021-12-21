@@ -1,25 +1,40 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
+
+//Componentes
+import Header from '../../components_administrador/navegacion/Header';
+//Context
+import AuthContext from '../../context/autentificacion/authContext';
+
 
 const SideBar = () => {
-    return (
-        //Obtener usuario
+    //Extraer la información de autentificacion
+    const authContext = useContext(AuthContext);
+    const {usuarioAutenticado, cerrarSesion, usuario} = authContext;
+    
 
-        
+    useEffect(() => {
+        usuarioAutenticado();
+        console.log(usuario);
+    }, [])
+
+    return (
         <aside>
             <h1>
                 <span>
-
+                    Bienvenido, 
                 </span>
             </h1>
 
-            <div className=''>
-                <h2>
-                    <table>
-                        <tbody>
-                        Componentes
-                        </tbody>
-                    </table>
-                </h2>
+            <div className='proyectos'>
+                <h2>Secciones</h2>
+                <Header/>
+            </div>
+            <div className='proyectos'>
+                <button
+                    className="btn btn-danger nuevo-post d-block"
+                    onClick ={() => cerrarSesion()}
+                >Cerrar Sesión
+                </button>
             </div>
         </aside>
      );

@@ -1,38 +1,36 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import Mesa from './Mesa';
 import 'bootstrap/dist/css/bootstrap.css';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import {ButtonGroup} from 'react-bootstrap'
+import MesaContext from '../../context/mesas/mesaContext';
 const ListadoMesas = () => {
-    const ubicaciones = [{ubicacion: 'Interior',
-                            mesas : [
-                                {id: 0, nombre: 'Mesa 1', ubicacion: 'Interior'},
-                                {id: 1,nombre: 'Mesa 2', ubicacion: 'Interior'},
-                                {id: 2,nombre: 'Mesa 3', ubicacion: 'Interior'},
-                                {id: 3,nombre: 'Mesa 4', ubicacion: 'Interior'}]},
-                        {ubicacion: 'Terraza',
-                            mesas : [
-                                {id: 4,nombre: 'Mesa 1', ubicacion: 'Terraza'},
-                                {id: 5,nombre: 'Mesa 2', ubicacion: 'Terraza'},
-                                {id: 6,nombre: 'Mesa 3', ubicacion: 'Terraza'},
-                                {id: 7,nombre: 'Mesa 4', ubicacion: 'Terraza'}]
-                            }]
+    const mesaContext = useContext(MesaContext);
+    const {mesas, obtenerMesas, mesaActual} = mesaContext;
+
+    useEffect( () => {
+        obtenerMesas();
+    },[])
     return ( 
         <ul>
-            {ubicaciones === 0 ? "No hay mesas" : (
-                ubicaciones.map(ubicacion => (
+            {mesas.lenght === 0 ? "No hay mesas" : (
+                
+                Object.keys(mesas).map(ubicacion => (
+                        
                         <DropdownButton
-                            as={ButtonGroup}
-                            key={ubicacion.ubicacion}
-                            id={`dropdown-variants-${ubicacion.ubicacion}`}
-                            variant={ubicacion.ubicacion.toLowerCase()}
-                            title={ubicacion.ubicacion}
-                        >
-                            <Mesa
-                                mesas={ubicacion.mesas}
-                            />
-                        </DropdownButton>
+                        as={ButtonGroup}
+                        key={ubicacion}
+                        id={`dropdown-variants-${ubicacion}`}
+                        variant={ubicacion.toLowerCase()}
+                        title={ubicacion[0].toUpperCase() + ubicacion.substring(1)}
+
+                    >
+                        <Mesa
+                            mesas={mesas[ubicacion].mesas}
+                        />
+                    </DropdownButton>
                 ))
+                    
             )}
         </ul>
      );

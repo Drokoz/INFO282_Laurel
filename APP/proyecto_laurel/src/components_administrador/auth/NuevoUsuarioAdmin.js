@@ -5,10 +5,7 @@ import AuthContext from '../../context/autentificacion/authContext'
 import 'bootstrap/dist/css/bootstrap.css';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
-/*
-<button class="dropdown-item" id="tipo_usuario_1" type="button" name='tipo_usuario' value={'administrador'} onSelect={onSelect}>Administrador</button>
-<button class="dropdown-item" id="tipo_usuario_1" type="button" name='tipo_usuario' value={'mesero'} onSelect={onSelect}>Mesero</button>
-*/
+
 
 const NuevoUsuarioAdmin = (props) => {
 
@@ -18,19 +15,6 @@ const NuevoUsuarioAdmin = (props) => {
     const {alerta, mostrarAlerta} = alertaContext;
     const authContext = useContext(AuthContext);
     const {mensaje, autenticado, registrarUsuario} = authContext;
-
-    useEffect( () => {
-        if(autenticado){
-        
-            props.history.push('/productos/listado');
-            
-    
-        }
-
-        if(mensaje){
-            mostrarAlerta(mensaje.msg, mensaje.categoria);
-        }
-    }, [mensaje, autenticado, props.history])
 
     const [usuario, guardarUsuario] = useState({
         nombre: '',

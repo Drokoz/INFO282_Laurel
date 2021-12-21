@@ -29,14 +29,11 @@ const Productos = () => {
     return (
         <div>
         <Fragment>
-           
-            <h1><Header></Header></h1>
             
             <h2 className="text-center my-5">
                 Listado de Productos
                 
             </h2>
-            
             <Link to={"/productos/nuevo"}
                             className="btn btn-danger nuevo-post d-block d-md-inline-block float-right"
                             >Agregar Productos

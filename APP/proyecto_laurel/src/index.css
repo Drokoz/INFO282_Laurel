@@ -107,6 +107,19 @@ aside {
 .proyectos {
   margin-top: 10rem;
 }
+.proyecto-izquierda {
+  float: left;
+  width: 30%;
+}
+.proyecto-derecha {
+  float: right;
+  width: 30%;
+}
+.proyecto-izquierda div,
+.proyecto-derecha div {
+  align-content: center;
+  padding: 10px;
+}
 .contenedor-form {
   padding: 5rem 3rem;
   max-width: 500px;
@@ -186,10 +199,9 @@ aside {
 }
 .btn:hover {
   cursor: pointer;
-  
 }
 .button {
-  background-color: #4CAF50; /* Green */
+  background-color: #4caf50; /* Green */
   border: 2px;
   color: white;
   padding: 15px 32px;
@@ -201,11 +213,9 @@ aside {
 .btn-primario {
   background-color: var(--gris2);
   color: var(--blanco);
-  
 }
 .btn-primario:hover {
   background: var(--gris3);
-  
 }
 .btn-secundario {
   background-color: var(--gris1);
@@ -213,10 +223,9 @@ aside {
 .btn-block {
   display: block;
   width: 100%;
-  
 }
 .btn-submit:hover {
-  border:rgba(0, 0, 0, 0.9);
+  border: rgba(0, 0, 0, 0.9);
 }
 
 .btn-blank {
@@ -224,7 +233,6 @@ aside {
   padding: 0;
   display: block;
   background-color: transparet;
-  
 }
 .btn-block-sesion {
   display: block;
@@ -270,8 +278,10 @@ aside {
 
 /** Formulario crear y editar tareas **/
 .formulario {
+  display: flex;
+  background-size: auto;
+  background-position: center;
   background-color: #fffdeb;
-  padding: 1rem;
 }
 .formulario form {
   max-width: 600px;
@@ -280,7 +290,6 @@ aside {
 .contenedor-input {
   display: flex;
   margin: 25px 25px;
-  
 }
 .contenedor-input label {
   margin-bottom: 1rem;
@@ -291,7 +300,7 @@ aside {
   border: 12rem;
   border-radius: 1rem;
   flex: 1;
-  width: 90%;  
+  width: 90%;
 }
 
 /** TAREAS LISTADO **/

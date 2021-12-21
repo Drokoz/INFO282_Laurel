@@ -3,7 +3,7 @@
 import {OBTENER_PRODUCTO, ELIMINAR_PRODUCTO} from '../../types/index'
 
 
-export default (state, action) =>{
+export default (state, action) => {
     switch (action.type) {
         case OBTENER_PRODUCTO:
             console.log("En OBTENER_PRODUCTOS",action.payload)

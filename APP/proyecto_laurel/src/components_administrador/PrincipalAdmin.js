@@ -2,25 +2,23 @@ import React, {Fragment, useEffect, useState, useContext} from 'react';
 import { Link } from "react-router-dom";
 
 //Componentes
-import SideBar from '../navegacion/Sidebar';
-import Header from '../../components/navegacion/Header';
-import NuevoPedido from './NuevoPedido';
-import ListadoPedido from './ListadoPedido';
+import SideBar from '../components/navegacion/Sidebar';
+import ListadoProductos from '../components/productos/ListadoProductos'
+
 //Context
 //import ProductosContext from '../../context/productos/productosContext';
 //import AuthContext from '../../context/autentificacion/authContext';
 
 
-const PrincipalMeseros = () => {
+const PrincipalAdmin = () => {
  
     return (
         <div className='contenedor-app'>
             <SideBar/>
             <div className='seccion-principal'>
                 <main>
-                    <NuevoPedido/>
                     <div className='contenedor-tareas'>
-                        <ListadoPedido/>
+                        <ListadoProductos/>
                     </div>
                 </main>
             </div>
@@ -28,4 +26,4 @@ const PrincipalMeseros = () => {
      );
 }
  
-export default PrincipalMeseros;
+export default PrincipalAdmin;
