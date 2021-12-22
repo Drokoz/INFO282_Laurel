@@ -17,7 +17,7 @@ const ListadoProductosMiddle = (Productos) => {
                         <th scope="col">Nombre</th>
                         <th scope="col">Precio</th>
                         <th scope="col">Comentarios</th>
-                        <th scope="col">acciones</th>
+                        <th scope="col">Agregar</th>
                     </tr>
                     
                 </thead>

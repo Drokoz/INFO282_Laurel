@@ -10,7 +10,7 @@ import MesaContext from '../../context/mesas/mesaContext';
 const ListadoPedido = () => {
 
     const pedidoContext = useContext(PedidoContext);
-    const {pedidoxMesa} = pedidoContext;
+    const {pedidoxMesa,eliminarPedido} = pedidoContext;
 
     const mesaContext = useContext(MesaContext);
     const {mesa} = mesaContext;
@@ -33,6 +33,7 @@ const ListadoPedido = () => {
                         <th scope="col">Nombre</th>
                         <th scope="col">Precio</th>
                         <th scope="col">Comentarios</th>
+                        <th scope="col">Eliminar</th>
                     </tr>
                     
                 </thead>
@@ -45,6 +46,13 @@ const ListadoPedido = () => {
                         )): null }
                 </tbody>
             </table>
+            {mesa ?
+                <button
+                        type="button"
+                        className="btn btn-danger"
+                        onClick = {() => {eliminarPedido(mesa.id)}}
+                        >Cerrar Mesa</button>
+            : null}
         </Fragment>
 
      );

@@ -141,8 +141,8 @@ const NuevoUsuarioAdmin = (props) => {
                 value="Crear Usuario" onClick = {onSubmit}/>
             </div>
             </form>
-            <Link to={'/'} className="enlace-cuenta">
-                Iniciar Sesión
+            <Link to={'/admin/menu'} className="enlace-cuenta">
+                Menu
             </Link>
             </div>
         </div>
