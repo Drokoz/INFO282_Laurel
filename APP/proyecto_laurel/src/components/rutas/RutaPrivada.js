@@ -11,7 +11,7 @@ const RutaPrivada = ({component: Component, ...props}) => {
         usuarioAutenticado();
     }, []);
     return ( 
-        console.log(!autenticado),
+        
         <Route {...props} render={ props => !autenticado ? <Redirect to="/" />
          : <Component {...props} />
         }/>

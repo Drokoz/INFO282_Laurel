@@ -93,7 +93,9 @@ exports.obtenerUsuario = async (req,res) => {
                 result = Object.values(JSON.parse(JSON.stringify(result)));
                 result = result[0];
                 console.log(result);
-                res.json({correoUsuario:result.correo_usuario, nombreUsuario: result.nombre_usuario});
+                const json = {correoUsuario:result.correo_usuario, nombreUsuario: result.nombre_usuario, tipoUsuario: result.tipo_usuario}
+                console.log(json);
+                res.json(json);
             }
         });
         

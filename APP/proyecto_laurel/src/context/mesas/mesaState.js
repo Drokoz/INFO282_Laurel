@@ -4,7 +4,7 @@ import mesaContext from './mesaContext';
 import mesaReducer from './mesaReducer';
 
 import clienteAxios from '../../config/axios';
-import {OBTENER_MESAS, MESA_ACTUAL,OBTENER_MESA_ACTUAL} from '../../types/index'
+import {OBTENER_MESAS, MESA_ACTUAL, MESA_ENTREGAR_PEDIDO} from '../../types/index'
 
 //Funcion para agrupar por ubicacion
 const agruparMesas = (payload) => {
@@ -23,7 +23,8 @@ const agruparMesas = (payload) => {
         nuevoObjeto[x.ubicacion].mesas.push({
         id: x.idmesas,
         nombre: x.nombre,
-        ubicacion: x.ubicacion
+        ubicacion: x.ubicacion,
+        pedidoMesa: []
         })
     
     })
@@ -33,6 +34,7 @@ const agruparMesas = (payload) => {
 const MesaState = props =>{
     const initialState = {
         mesas : {},
+        pedidoMesa: null,
         mesa: null
     }
 
@@ -59,11 +61,10 @@ const MesaState = props =>{
 
     //Selecciona la mesa
 
-    const mesaActual = (mesaId ,ubicacion) => {
-        const res = {id: mesaId, ubicacion:ubicacion}
+    const mesaActual = (mesa) => {
         dispatch({
             type:MESA_ACTUAL,
-            payload: res
+            payload: mesa
         })
     }
 
@@ -73,14 +74,23 @@ const MesaState = props =>{
             payload: state.mesa
         })
     }
+
+    const mesaEntregarPedido = (pedido) => {
+        dispatch({
+            type:MESA_ENTREGAR_PEDIDO,
+            payload: pedido
+        })
+    }
     return(
         <mesaContext.Provider
             value={{
                 mesas: state.mesas,
                 mesa: state.mesa,
+                pedidoMesa: state.pedidoMesa,
                 obtenerMesas,
                 obtenerMesaActual,
-                mesaActual
+                mesaActual,
+                mesaEntregarPedido
             }}
         >
             {props.children}

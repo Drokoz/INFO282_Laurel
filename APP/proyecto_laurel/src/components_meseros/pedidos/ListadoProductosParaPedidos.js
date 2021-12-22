@@ -1,8 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import { Accordion } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ListadoProductosMiddle from "./ListadoProductosMiddle";
 
 import ProductosContext from "../../context/productos/productosContext";
+import MesaContext from "../../context/mesas/mesaContext";
 //Funcion para agrupar por categoria
 const agruparCategorias = (arreglo) => {
     //Creamos un nuevo objeto donde vamos a almacenar por ciudades. 
@@ -38,25 +40,30 @@ const ListadoProductosParaPedido = () => {
     const productosContext = useContext(ProductosContext);
     const {productos, obtenerProductos} = productosContext;
      
+    const mesaContext = useContext(MesaContext);
+    const {mesa} = mesaContext;
+    
     const productosAgrugados = agruparCategorias(productos);
     
 
     return (
         <div className="seccion-principal">
+            {mesa ? (
             <Accordion>
                 {productosAgrugados.lenght === 0 ? "No hay mesas" : (
                     
                     Object.keys(productosAgrugados).map(categoria => (
                         
-                        <Accordion.Item eventKey={categoria}>
+                        <Accordion.Item eventKey={categoria} key={categoria}>
                             <Accordion.Header>{categoria}</Accordion.Header>
                                 <Accordion.Body>
+                                        <ListadoProductosMiddle Productos={productosAgrugados[categoria].productos}/>
                                 </Accordion.Body>
                         </Accordion.Item>
                         )
                     )
                 )}
-            </Accordion>
+            </Accordion>) : null}
         </div>
      );
 }

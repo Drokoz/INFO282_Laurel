@@ -10,20 +10,20 @@ import MesaContext from '../../context/mesas/mesaContext';
 const ListadoPedido = () => {
 
     const pedidoContext = useContext(PedidoContext);
-    const {obtenerProductosPedido, pedido} = pedidoContext;
+    const {pedidoxMesa} = pedidoContext;
 
     const mesaContext = useContext(MesaContext);
-    const {mesa, obtenerMesaActual} = mesaContext;
+    const {mesa} = mesaContext;
 
     useEffect( () => {
-        obtenerProductosPedido();   
-    },[]);
+
+    },[pedidoxMesa])
     return ( 
         <Fragment>
             
-            <h2 className="text-center my-5">
-                Pedido {mesa}
-            </h2>
+            {mesa ? <h2 className="text-center my-5">
+                Pedido {mesa.nombre} {mesa.ubicacion}
+            </h2>: null}
     
             <table className="table table-striped">
             
@@ -37,14 +37,12 @@ const ListadoPedido = () => {
                     
                 </thead>
                 <tbody>
-                    {pedido.lenght === 0 ? "No hay productos" : (
-                        pedido.map(producto => (
+                    {pedidoxMesa ? pedidoxMesa.map(producto => (
                             <Producto
                                 key={producto.idProducto}
                                 producto={producto}
                             />
-                        ))
-                    )}
+                        )): null }
                 </tbody>
             </table>
         </Fragment>

@@ -43,11 +43,10 @@ function App() {
                       <Route exact path="/" component={InicioSesion}/>
                       <Route exact path="/usuario/nuevo" component={NuevoUsuario} />
 
-                      <Route exact path="/admin/menu" component={PrincipalAdmin} />
+                      <RutaPrivada exact path="/admin/menu" component={PrincipalAdmin} />
                       <Route exact path="/admin/usuario/nuevo"component={NuevoUsuarioAdmin} />
                       
                       <Route exact path="/meseros/menu"component={MenuMeseros} />
-                      <Route exact path="/meseros/productos/listado"component={ListadoProductosParaPedido} />
 
                       <RutaPrivada exact path="/productos/listado" component={ListadoProductos} />
                       <RutaPrivada exact path="/productos/nuevo" component={NuevoProducto} />

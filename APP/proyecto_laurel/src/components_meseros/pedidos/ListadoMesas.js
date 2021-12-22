@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import {ButtonGroup} from 'react-bootstrap'
 import MesaContext from '../../context/mesas/mesaContext';
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
 const ListadoMesas = () => {
     const mesaContext = useContext(MesaContext);
     const {mesas, obtenerMesas, mesaActual} = mesaContext;
@@ -11,28 +13,22 @@ const ListadoMesas = () => {
     useEffect( () => {
         obtenerMesas();
     },[])
-    return ( 
-        <ul>
+    return (
+        <div className="aside">
+        <Tabs>
             {mesas.lenght === 0 ? "No hay mesas" : (
                 
                 Object.keys(mesas).map(ubicacion => (
-                        
-                        <DropdownButton
-                        as={ButtonGroup}
-                        key={ubicacion}
-                        id={`dropdown-variants-${ubicacion}`}
-                        variant={ubicacion.toLowerCase()}
-                        title={ubicacion[0].toUpperCase() + ubicacion.substring(1)}
-
-                    >
-                        <Mesa
-                            mesas={mesas[ubicacion].mesas}
-                        />
-                    </DropdownButton>
+                        <Tab title={ubicacion} key={ubicacion} eventKey={ubicacion}>
+                            <Mesa
+                                mesas={mesas[ubicacion].mesas}
+                            />
+                        </Tab>
                 ))
                     
             )}
-        </ul>
+        </Tabs>
+        </div>
      );
 }
  

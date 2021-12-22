@@ -1,5 +1,5 @@
 
-import {OBTENER_PEDIDO, AGREGAR_PRODUCTO_PEDIDO} from '../../types/index'
+import {OBTENER_PEDIDO, AGREGAR_PRODUCTO_PEDIDO, OTORGAR_PEDIDO} from '../../types/index'
 
 export default (state,action) => {
     switch (action.type) {
@@ -14,7 +14,11 @@ export default (state,action) => {
                 ...state,
                 pedido: action.payload
             }
-        
+        case OTORGAR_PEDIDO:
+            return{
+                ...state,
+                pedidoxMesa: state.pedido.filter(productos => productos.mesaPedido == action.payload)
+            }
         default:
             break;
     }

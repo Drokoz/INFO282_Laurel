@@ -30,7 +30,8 @@ const NuevoUsuario = (props) => {
         nombre: '',
         email: '',
         contraseña: '',
-        confirmar: ''
+        confirmar: '',
+        tipo_usuario: 'administrador'
     });
 
 
@@ -64,7 +65,8 @@ const NuevoUsuario = (props) => {
         registrarUsuario({
             nombreUsuario: usuario.nombre, 
             correoUsuario: usuario.email,
-            contraseñaUsuario: usuario.contraseña
+            contraseñaUsuario: usuario.contraseña,
+            tipoUsuario: usuario.tipo_usuario
         })
         //agregarUsuario();
     };

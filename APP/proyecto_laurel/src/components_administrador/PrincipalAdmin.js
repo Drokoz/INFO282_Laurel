@@ -9,6 +9,7 @@ import ListadoProductos from '../components/productos/ListadoProductos'
 //import ProductosContext from '../../context/productos/productosContext';
 //import AuthContext from '../../context/autentificacion/authContext';
 
+//USAR CONTEXT PARA CONTROLAR QUE COMPONENTE SE UTILIZA O SE MUESTRA EN LA DERECHA
 
 const PrincipalAdmin = () => {
  

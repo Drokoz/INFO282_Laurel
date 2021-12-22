@@ -2,31 +2,35 @@ import React, {useContext} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import Dropdown from 'react-bootstrap/Dropdown'
 import MesaContext from '../../context/mesas/mesaContext';
-import { Redirect } from 'react-router-dom';
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
+import PedidoContext from '../../context/pedidos/pedidoContext';
 const Mesa = (mesas) => {
+
     const mesaContext = useContext(MesaContext);
-    const {mesaActual} = mesaContext;
+    const {mesaActual, pedidoMesa, mesaEntregarPedido} = mesaContext;
 
-    const onClick = (e) => {
-        mesaActual(e.target.id, e.target.value);
+    const pedidoContext = useContext(PedidoContext);
+    const {otorgarPedido} = pedidoContext;
+
+    const onSelect = (eventKey, e) => {
+        const idx = mesas.mesas.findIndex( mesa => mesa.id == eventKey);
+        otorgarPedido(eventKey);
+        mesaActual(mesas.mesas[idx]);
     }
-    console.log(mesas.mesas);
     return (
-        
-        mesas.mesas.map(mesa => (
+        <Tabs onSelect={onSelect}>
+            {mesas.mesas.map(mesa => (
 
-            <Dropdown.Item
-            as="button"
-            key={mesa.id}
-            eventKey={mesa.id}
-            id={mesa.id}
-            value={mesa.ubicacion}
-            nombre={mesa.nombre}
-            onClick={onClick}
-            >
-                {mesa.nombre}</Dropdown.Item>
-            )
-        )
+                <Tab
+                key={mesa.id}
+                eventKey={mesa.id}
+                title={mesa.nombre}
+                >
+                    
+                </Tab>
+            ))}
+        </Tabs>
         
      );
 }

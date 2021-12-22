@@ -1,5 +1,5 @@
 
-import {OBTENER_MESAS, MESA_ACTUAL,OBTENER_MESA_ACTUAL} from '../../types/index'
+import {OBTENER_MESAS, MESA_ACTUAL,OBTENER_MESA_ACTUAL,MESA_ENTREGAR_PEDIDO} from '../../types/index'
 
 export default (state, action) => {
     switch (action.type) {
@@ -11,12 +11,17 @@ export default (state, action) => {
         case MESA_ACTUAL:
             return{
                 ...state,
-                mesa: state.mesas[action.payload.ubicacion].mesas.filter(mesa => mesa.id == action.payload.id )
+                mesa: action.payload
             }
         case OBTENER_MESA_ACTUAL:
             return{
                 ...state,
                 mesa: action.payload
+            }
+        case MESA_ENTREGAR_PEDIDO:
+            return{
+                ...state,
+                pedidoMesa:action.payload
             }
         default:
             break;

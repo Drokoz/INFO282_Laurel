@@ -19,10 +19,11 @@ const SideBar = () => {
 
     return (
         <aside>
-            <h1>
-                <span>
-                    Bienvenido, 
+            <h1> {usuario ? <span>
+                    Bienvenido, {usuario.nombreUsuario}
                 </span>
+                : null}
+                
             </h1>
 
             <div className='proyectos'>

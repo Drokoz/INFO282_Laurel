@@ -22,7 +22,7 @@ exports.crearUsuario = async (req,res) => {
         });
         //guardar usuario
 
-        const {nombreUsuario,correoUsuario,contraseñaUsuario} = await req.body
+        const {nombreUsuario,correoUsuario,contraseñaUsuario, tipoUsuario} = await req.body
         console.log(nombreUsuario,correoUsuario,contraseñaUsuario)
 
         db.query("SELECT * FROM `usuarios` WHERE `correo_usuario` = ?", correoUsuario, async function (err, result) {
@@ -51,8 +51,8 @@ exports.crearUsuario = async (req,res) => {
                 console.log(typeof(contraseñaUsuario));
                 const salt = await bcryptjs.genSalt(10);
                 const contraseñaUsuario_hashed = await bcryptjs.hash(contraseñaUsuario,salt);
-                const sqlInsert = "INSERT INTO `usuarios` (`correo_usuario`, `nombre_usuario`,`contraseña_usuario`) VALUES (?,?,?);"
-                db.query(sqlInsert, [correoUsuario, nombreUsuario, contraseñaUsuario_hashed],
+                const sqlInsert = "INSERT INTO `usuarios` (`correo_usuario`, `nombre_usuario`,`contraseña_usuario`, `tipo_usuario`) VALUES (?,?,?,?);"
+                db.query(sqlInsert, [correoUsuario, nombreUsuario, contraseñaUsuario_hashed, tipoUsuario],
                     function(err,row,fields) { 
                             if(err) {
                                 console.log("Error de ingreso");

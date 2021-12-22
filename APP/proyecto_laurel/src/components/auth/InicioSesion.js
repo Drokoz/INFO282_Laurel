@@ -9,19 +9,19 @@ const InicioSesion = (props) => {
     const alertaContext = useContext(AlertaContext);
     const {alerta, mostrarAlerta} = alertaContext;
     const authContext = useContext(AuthContext);
-    const {mensaje, autenticado, iniciarSesion} = authContext;
+    const {mensaje, autenticado, iniciarSesion, usuario} = authContext;
 
-    const [usuario, guardarUsuario] = useState({
+    const [usuarioComp, guardarUsuario] = useState({
         email: '',
         contraseña: ''
     });
 
 
-    const {email, contraseña} = usuario;
+    const {email, contraseña} = usuarioComp;
 
     const onChange = e => {
         guardarUsuario({
-            ...usuario,
+            ...usuarioComp,
             [e.target.name] : e.target.value
     })
 }
@@ -40,15 +40,23 @@ const InicioSesion = (props) => {
     //PASSWORD O USUARIO NO EXISTA
     useEffect( () => {
         if(autenticado){
-        
-            props.history.push('/productos/listado');
-            
+
+            //props.history.push('/admin/menu');
+            if (usuario) {
+                console.log(usuario);
+                if(usuario.tipoUsuario == 'administrador'){
+                    props.history.push('/admin/menu');
+                }
+                else{
+                    props.history.push('/meseros/menu');
+                }
+        }
         }
 
         if(mensaje){
             mostrarAlerta(mensaje.msg, mensaje.categoria);
         }
-    }, [mensaje, autenticado, props.history])
+    }, [mensaje, autenticado, props.history,usuario])
     return(
         <div className="form-usuario">
             {alerta ? (<div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div>) : null}
