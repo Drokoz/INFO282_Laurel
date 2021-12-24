@@ -7,7 +7,7 @@ const ProductoParaPedido = (Producto) => {
     //Context
 
     const pedidoContext = useContext(PedidoContext);
-    const {agregarProductoPedido, otorgarPedido} = pedidoContext;
+    const {agregarProductoPedido, otorgarPedido, obtenerProductosPedido} = pedidoContext;
 
     const mesaContext = useContext(MesaContext);
     const {mesa} = mesaContext;
@@ -35,13 +35,10 @@ const ProductoParaPedido = (Producto) => {
             precioProducto: Producto.Producto.precio_producto,
             cantidadProducto: cantidadEntrega,
             comentariosProducto: comentariosProducto,
-            mesaPedido : mesa.id,
-            precioTotal: Producto.Producto.precio_producto
+            mesaPedido : mesa.id
         }
         console.log(enviarProducto);
         agregarProductoPedido(enviarProducto);
-
-        otorgarPedido(mesa.id);
         
         //Reiniciar formulario
         setCantidadProducto('');

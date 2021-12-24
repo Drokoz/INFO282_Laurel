@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react';
-import Header from '../navegacion/Header';
+import Header from '../../components/navegacion/Header';
 import ProductosContext from '../../context/productos/productosContext';
 
 const NuevoProducto = () => {

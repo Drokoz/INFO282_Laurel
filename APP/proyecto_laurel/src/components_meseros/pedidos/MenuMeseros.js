@@ -1,9 +1,10 @@
 import React, {useContext, useEffect} from 'react';
 
 //Componentes
-import ListadoMesas from './ListadoMesas';
-import ListadoProductosParaPedido from './ListadoProductosParaPedidos';
+import ListadoMesas from '../mesas/ListadoMesas';
+import ListadoProductosParaPedido from '../productos_para_pedidos/ListadoProductosParaPedidos';
 import ListadoPedido from './ListadoPedido';
+
 //Context
 import AuthContext from '../../context/autentificacion/authContext';
 
@@ -11,10 +12,9 @@ import AuthContext from '../../context/autentificacion/authContext';
 const MenuMeseros = () => {
     //Extraer la información de autentificacion
     const authContext = useContext(AuthContext);
-    const {usuarioAutenticado, usuario} = authContext;
+    const {usuario} = authContext;
 
     useEffect( () => {
-        //usuarioAutenticado();
     }, [])
     return (
         <div className='seccion-principal'>

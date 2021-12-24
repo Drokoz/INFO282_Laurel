@@ -1,15 +1,19 @@
 import React, { useContext, useEffect } from 'react';
+
+//Componentes
 import Mesa from './Mesa';
-import 'bootstrap/dist/css/bootstrap.css';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import {ButtonGroup} from 'react-bootstrap'
+
+//Context
 import MesaContext from '../../context/mesas/mesaContext';
+//Tabs
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
+import 'bootstrap/dist/css/bootstrap.css';
 const ListadoMesas = () => {
     const mesaContext = useContext(MesaContext);
-    const {mesas, obtenerMesas, mesaActual} = mesaContext;
+    const {mesas, obtenerMesas} = mesaContext;
 
+    
     useEffect( () => {
         obtenerMesas();
     },[])

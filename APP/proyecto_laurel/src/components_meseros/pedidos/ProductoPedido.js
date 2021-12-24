@@ -5,13 +5,13 @@ const ProductoPedido = ({producto}) => {
     const pedidoContext = useContext(PedidoContext);
     const {eliminarProductoPedido} = pedidoContext;
     
-    const { cantidadProducto, nombreProducto, precioProducto, comentariosProducto, precioTotal} = producto
+    const { cantidadProducto, nombreProducto, precioProducto, comentariosProducto} = producto
 
     return ( 
         <tr>
             <td>{cantidadProducto}</td>
             <td>{nombreProducto}</td>
-            <td><span className="font-weight-bold"> $ {precioTotal} </span></td>
+            <td><span className="font-weight-bold"> $ {cantidadProducto * precioProducto} </span></td>
             <td>{comentariosProducto}</td>
             <td><button
                         type="button"

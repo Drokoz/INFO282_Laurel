@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 
 //Componentes
 import Producto from './Producto'
-import Header from '../navegacion/Header';
-import SideBar from '../navegacion/Sidebar';
+
 //Context
 import ProductosContext from '../../context/productos/productosContext';
 import AuthContext from '../../context/autentificacion/authContext';

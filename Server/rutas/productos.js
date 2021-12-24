@@ -20,6 +20,13 @@ router.get('/obtener',
     auth,
     productoControlador.obtenerProductos
 );
+router.get('/obtener/producto',
+[
+
+],
+    auth,
+    productoControlador.obtenerProductosID
+);
 router.delete('/eliminar/:id',
 [
 

@@ -3,9 +3,9 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 
 //Componentes
 //Productos
-import ListadoProductos from './components/productos/ListadoProductos';
-import NuevoProducto from './components/productos/NuevoProducto';
-import EditarProducto from './components/productos/EditarProducto';
+import ListadoProductos from './components_administrador/productos/ListadoProductos';
+import NuevoProducto from './components_administrador/productos/NuevoProducto';
+import EditarProducto from './components_administrador/productos/EditarProducto';
 
 //Sesion
 import InicioSesion from './components/auth/InicioSesion';
@@ -15,10 +15,10 @@ import RutaPrivada from './components/rutas/RutaPrivada';
 //Admin
 import NuevoUsuarioAdmin from './components_administrador/auth/NuevoUsuarioAdmin';
 import PrincipalAdmin from './components_administrador/PrincipalAdmin';
-
+import ListadoPedidosAdmin_Cocina from './components_administrador/pedidos.js/ListadoPedidosAdmin';
 //Meseros
 import MenuMeseros from './components_meseros/pedidos/MenuMeseros';
-import ListadoProductosParaPedido from './components_meseros/pedidos/ListadoProductosParaPedidos';
+
 //Context
 import ProductoState from './context/productos/productosState';
 import AlertaState from './context/alertas/alertaState';
@@ -26,6 +26,7 @@ import AuthState from './context/autentificacion/authState';
 import tokenAuth from './config/token';
 import PedidoState from './context/pedidos/pedidoState'
 import MesaState from './context/mesas/mesaState';
+
 // Revisar Token
 const token = localStorage.getItem('token');
 if (token){
@@ -45,7 +46,7 @@ function App() {
 
                       <RutaPrivada exact path="/admin/menu" component={PrincipalAdmin} />
                       <Route exact path="/admin/usuario/nuevo"component={NuevoUsuarioAdmin} />
-                      
+                      <Route exact path="/admin/listado/mesas"component={ListadoPedidosAdmin_Cocina} />
                       <Route exact path="/meseros/menu"component={MenuMeseros} />
 
                       <RutaPrivada exact path="/productos/listado" component={ListadoProductos} />

@@ -2,7 +2,7 @@ import React, {useState, useContext, useEffect} from 'react';
 
 import ProductosContext from '../../context/productos/productosContext';
 import PedidoContext from '../../context/pedidos/pedidoContext';
-import { Accordion } from "react-bootstrap";
+
 
 const NuevoPedido = () => {
 

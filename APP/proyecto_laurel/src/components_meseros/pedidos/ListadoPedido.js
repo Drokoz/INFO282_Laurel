@@ -10,14 +10,16 @@ import MesaContext from '../../context/mesas/mesaContext';
 const ListadoPedido = () => {
 
     const pedidoContext = useContext(PedidoContext);
-    const {pedidoxMesa,eliminarPedido} = pedidoContext;
+    const {pedido,pedidoxMesa,eliminarPedido,otorgarPedido,obtenerProductosPedido} = pedidoContext;
 
     const mesaContext = useContext(MesaContext);
     const {mesa} = mesaContext;
 
     useEffect( () => {
-
-    },[pedidoxMesa])
+        if(mesa){
+            otorgarPedido(mesa.id)
+        }
+    },[pedido])
     return ( 
         <Fragment>
             
@@ -40,7 +42,7 @@ const ListadoPedido = () => {
                 <tbody>
                     {pedidoxMesa ? pedidoxMesa.map(producto => (
                             <Producto
-                                key={producto.idProducto}
+                                key={producto.idpedido}
                                 producto={producto}
                             />
                         )): null }

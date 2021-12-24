@@ -1,9 +1,10 @@
 import React, {useContext} from 'react';
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
 import 'bootstrap/dist/css/bootstrap.css';
 import Dropdown from 'react-bootstrap/Dropdown'
 import MesaContext from '../../context/mesas/mesaContext';
-import Tabs from 'react-bootstrap/Tabs';
-import Tab from 'react-bootstrap/Tab';
+
 import PedidoContext from '../../context/pedidos/pedidoContext';
 const Mesa = (mesas) => {
 
@@ -15,8 +16,9 @@ const Mesa = (mesas) => {
 
     const onSelect = (eventKey, e) => {
         const idx = mesas.mesas.findIndex( mesa => mesa.id == eventKey);
-        otorgarPedido(eventKey);
         mesaActual(mesas.mesas[idx]);
+        otorgarPedido(eventKey);
+        
     }
     return (
         <Tabs onSelect={onSelect}>

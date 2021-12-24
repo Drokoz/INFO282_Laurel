@@ -22,8 +22,7 @@ export default (state,action) => {
         case ELIMINAR_PRODUCTO_PEDIDO:
             return{
                 ...state,
-                pedido: action.payload.pedido,
-                pedidoxMesa: action.payload.pedidoxMesa
+                pedido: action.payload
             }
         case ELIMINAR_PEDIDO:
             return{

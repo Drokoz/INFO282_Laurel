@@ -54,11 +54,10 @@ exports.obtenerProductos = (req, res) => {
       database: "LaurelAppDB",
       insecureAuth: "True"
   });
-    console.log("DESDE ELIMINAR PRODUCTO")
-    console.log(req.params)
+
     const id = req.params.id;
-    console.log(id);
     const sqlDelete = "DELETE FROM producto WHERE idproducto = (?);"
+    
     db.query(sqlDelete, [id],
     function(err,row,fields) { 
         if(err) {
@@ -69,4 +68,34 @@ exports.obtenerProductos = (req, res) => {
         }
      });
 
+}
+
+exports.obtenerProductosID = async (req, res) => {
+  const db = mysql.createPool({
+      host: "localhost",
+      user: "root",
+      password: "T^KppimYHbgP9o$$",
+      database: "LaurelAppDB",
+      insecureAuth: "True"
+  });
+
+  const idProducto = await req.body.idProducto;
+  try {
+      const sqlGet = "SELECT * FROM `producto` WHERE idproducto = (?);"
+      db.query(sqlGet, [idProducto],
+          function(err, result) { 
+              if(err) {
+                console.log(err);
+              }
+              else{
+                  const resu = Object.values(JSON.parse(JSON.stringify(result)))[0];
+                  console.log(resu);
+                  res.send(resu);
+              }
+          }
+      );
+     
+  } catch (error) {
+      console.log(error);
+  }
 }
