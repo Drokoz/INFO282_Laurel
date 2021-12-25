@@ -2,14 +2,14 @@ import React, {useContext} from 'react';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import 'bootstrap/dist/css/bootstrap.css';
-import Dropdown from 'react-bootstrap/Dropdown'
 import MesaContext from '../../context/mesas/mesaContext';
 
 import PedidoContext from '../../context/pedidos/pedidoContext';
+
 const Mesa = (mesas) => {
 
     const mesaContext = useContext(MesaContext);
-    const {mesaActual, pedidoMesa, mesaEntregarPedido} = mesaContext;
+    const {mesaActual} = mesaContext;
 
     const pedidoContext = useContext(PedidoContext);
     const {otorgarPedido} = pedidoContext;

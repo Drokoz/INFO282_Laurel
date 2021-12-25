@@ -5,11 +5,14 @@ import Mesa from './Mesa';
 
 //Context
 import MesaContext from '../../context/mesas/mesaContext';
+
 //Tabs
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import 'bootstrap/dist/css/bootstrap.css';
+
 const ListadoMesas = () => {
+
     const mesaContext = useContext(MesaContext);
     const {mesas, obtenerMesas} = mesaContext;
 

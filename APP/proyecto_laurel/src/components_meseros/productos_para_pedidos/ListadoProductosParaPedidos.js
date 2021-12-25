@@ -31,10 +31,8 @@ const agruparCategorias = (arreglo) => {
 }
 
 const ListadoProductosParaPedido = () => {
-    useEffect( () => {
-        obtenerProductos();
-        
-    },[]);
+
+    
 
     //Extraer productos
     const productosContext = useContext(ProductosContext);
@@ -43,21 +41,25 @@ const ListadoProductosParaPedido = () => {
     const mesaContext = useContext(MesaContext);
     const {mesa} = mesaContext;
     
-    const productosAgrugados = agruparCategorias(productos);
-    
-
+    useEffect( () => {
+        if(productos.length === 0){
+        obtenerProductos();}
+        else{
+            console.log(productos)
+        }
+    },[productos]);
     return (
         <div className="seccion-principal">
             {mesa ? (
             <Accordion>
-                {productosAgrugados.lenght === 0 ? "No hay mesas" : (
+                {productos.length === 0 ? "No hay mesas" : (
                     
-                    Object.keys(productosAgrugados).map(categoria => (
+                    Object.keys(agruparCategorias(productos)).map(categoria => (
                         
                         <Accordion.Item eventKey={categoria} key={categoria}>
                             <Accordion.Header>{categoria}</Accordion.Header>
                                 <Accordion.Body>
-                                        <ListadoProductosMiddle Productos={productosAgrugados[categoria].productos}/>
+                                        <ListadoProductosMiddle Productos={agruparCategorias(productos)[categoria].productos}/>
                                 </Accordion.Body>
                         </Accordion.Item>
                         )

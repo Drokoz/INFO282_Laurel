@@ -7,30 +7,45 @@ import ListadoPedido from './ListadoPedido';
 
 //Context
 import AuthContext from '../../context/autentificacion/authContext';
-
+import PedidoContext from '../../context/pedidos/pedidoContext';
 
 const MenuMeseros = () => {
     //Extraer la información de autentificacion
     const authContext = useContext(AuthContext);
     const {usuario} = authContext;
 
-    useEffect( () => {
-    }, [])
+    const pedidoContext = useContext(PedidoContext);
+    const {obtenerProductosPedido} = pedidoContext;
+
+    useEffect(() =>{
+        obtenerProductosPedido()
+    },[])
     return (
-        <div className='seccion-principal'>
-            
-            <h1> {usuario ? <span>
-                    Hola, {usuario.nombreUsuario}
-                </span> : null}
-                
-            </h1>
-            <div className='container'>
-                <h2>Tus mesas</h2>
-                <ListadoMesas/>
-                <ListadoProductosParaPedido/>
-            </div>
-            <div className='container'>
+        <div className='contenedor-app-pedidos'>
+            <aside>
+                <div className='seccion-listado'>
+                {usuario ?
+                    <h1> 
+                        <span>
+                            Hola, {usuario.nombreUsuario}
+                        </span> 
+                        
+                    </h1>
+                : null}
+                </div>
                 <ListadoPedido/>
+            </aside>
+           
+            <div className='container'>
+                    <div>
+                        <h2>Tus mesas</h2>
+                        <ListadoMesas/>
+                    </div>
+                    <div className='container'>
+                        <h2>Productos</h2>
+                        <ListadoProductosParaPedido/>
+                    </div>
+                
             </div>
         </div>
      );

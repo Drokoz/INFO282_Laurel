@@ -1,4 +1,4 @@
-import React, {Fragment,useState, useContext, useEffect, useReducer} from 'react';
+import React, {Fragment, useContext, useEffect} from 'react';
 
 //Componentes
 import Producto from './ProductoPedido'
@@ -15,11 +15,21 @@ const ListadoPedido = () => {
     const mesaContext = useContext(MesaContext);
     const {mesa} = mesaContext;
 
+    
+
+    function add(sumaTotal, a) {
+        return sumaTotal + a.precioProducto;
+      }
     useEffect( () => {
+        
         if(mesa){
             otorgarPedido(mesa.id)
         }
-    },[pedido])
+        if(pedido.lenght === 0){
+            obtenerProductosPedido()
+        }
+        
+    },[pedido,mesa])
     return ( 
         <Fragment>
             
@@ -46,6 +56,17 @@ const ListadoPedido = () => {
                                 producto={producto}
                             />
                         )): null }
+                </tbody>
+                <tbody>
+                    {pedidoxMesa.lenght === 0 || pedidoxMesa.reduce(add,0) === 0 ? null : (
+                        <tr>
+                            <th></th>
+                            <th> Total = </th>
+                            <td><span className="font-weight-bold"> $ {pedidoxMesa.reduce(add,0)} </span></td>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        )}
                 </tbody>
             </table>
             {mesa ?

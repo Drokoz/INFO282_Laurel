@@ -43,14 +43,20 @@ const InicioSesion = (props) => {
 
             //props.history.push('/admin/menu');
             if (usuario) {
-                console.log(usuario);
-                if(usuario.tipoUsuario == 'administrador'){
+
+                console.log("moviendo", usuario.tipoUsuario);
+                if(usuario.tipoUsuario === 'administrador'){
                     props.history.push('/admin/menu');
                 }
-                else{
+                else {
+                    if(usuario.tipoUsuario === 'mesero'){
                     props.history.push('/meseros/menu');
+                    }
+                    else{
+                        props.history.push('/cb/listado/pedido');
+                    }
                 }
-        }
+            }
         }
 
         if(mensaje){

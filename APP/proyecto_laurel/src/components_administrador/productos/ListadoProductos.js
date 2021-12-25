@@ -34,7 +34,7 @@ const Productos = () => {
                 
             </h2>
             <Link to={"/productos/nuevo"}
-                            className="btn btn-danger nuevo-post d-block d-md-inline-block float-right"
+                            className="btn btn-primary nuevo-post d-block d-md-inline-block float-right"
                             >Agregar Productos
                         </Link>
             <table className="table table-striped">

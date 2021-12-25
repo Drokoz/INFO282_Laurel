@@ -9,6 +9,7 @@ router.post('/nuevo',
 [
 
 ],
+    auth,
     pedidosControlador.nuevoProductoPedido
 );
 
@@ -16,24 +17,28 @@ router.get('/obtener',
 [
 
 ],
+    auth,
     pedidosControlador.obtenerProductosPedido
 );
 router.get('/obtener/producto-mesa',
 [
 
 ],
+    auth,
     pedidosControlador.obtenerProductosPedidoxMesa
 );
 router.delete('/eliminar/:id',
 [
 
 ],
+    auth,
     pedidosControlador.eliminarProductoPedido
 );
 router.put('/modificar/',
 [
 
 ],
+    auth,
     pedidosControlador.modificarProductoPedido
 );
 

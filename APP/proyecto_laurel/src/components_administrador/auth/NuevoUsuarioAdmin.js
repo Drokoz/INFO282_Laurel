@@ -14,7 +14,7 @@ const NuevoUsuarioAdmin = (props) => {
     const alertaContext = useContext(AlertaContext);
     const {alerta, mostrarAlerta} = alertaContext;
     const authContext = useContext(AuthContext);
-    const {mensaje, autenticado, registrarUsuario} = authContext;
+    const {mensaje, autenticado, registrarUsuario, tipoUsuarios, obtenerTipoUsuario} = authContext;
 
     const [usuario, guardarUsuario] = useState({
         nombre: '',
@@ -69,7 +69,17 @@ const NuevoUsuarioAdmin = (props) => {
             tipoUsuario: usuario.tipo_usuario
         })
         //agregarUsuario();
+        guardarUsuario({
+            nombre: '',
+            email: '',
+            contraseña: '',
+            confirmar: '',
+            tipo_usuario:'Tipo de usuario'
+        });
     };
+    useEffect(() => {
+        obtenerTipoUsuario();
+    }, [])
     return(
         <div className='contenedor-app'>
             <SideBar/>
@@ -129,14 +139,18 @@ const NuevoUsuarioAdmin = (props) => {
                         </div>
                         <div className="campo-form">
                             <label htmlFor="confirmar"> Tipo de usuario </label>
+                            
                             <DropdownButton
                                 alignRight
-                                title={usuario.tipo_usuario}
+                                title={(usuario.tipo_usuario[0].toUpperCase() + usuario.tipo_usuario.substring(1))}
                                 id="dropdown-menu-align-right"
                                 onSelect={onSelect}
                                 >
-                                <Dropdown.Item eventKey="administrador" name='tipo_usuario'>Administrador</Dropdown.Item>
-                                <Dropdown.Item eventKey="mesero" name='tipo_usuario'>Mesero</Dropdown.Item>
+                                {tipoUsuarios.length === 0 ? null : ( tipoUsuarios.map( tuser => 
+                                    <Dropdown.Item eventKey={tuser.tipo_usuario} name='tipo_usuario'>{(tuser.tipo_usuario[0].toUpperCase() + tuser.tipo_usuario.substring(1))}</Dropdown.Item>
+                                
+                                )
+                                )}
                             </DropdownButton>
                         </div>
                     <div className="campo-form">

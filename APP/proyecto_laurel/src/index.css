@@ -87,7 +87,21 @@ h1 a.text-light:hover {
     background-color: #fffef5;
   }
 }
+@media (min-width: 768px) {
+  .contenedor-app-pedidos {
+    display: flex;
+    min-height: 100vh;
+  }
 
+  aside {
+    background-color: #caf8cc;
+    flex: 0 0 auto;
+  }
+  .seccion-principal {
+    flex: 1;
+    background-color: #fffef5;
+  }
+}
 /* BARRA LATERAL */
 aside {
   padding: 3rem;
@@ -198,6 +212,20 @@ aside {
   transition: background-color 0.3s ease;
 }
 .btn:hover {
+  cursor: pointer;
+}
+.btn-eliminar {
+  font-family: var(--headingFont);
+  text-align: left;
+  padding: 0 28px;
+  display: inline-block;
+  font-size: 18px;
+  width: 8px;
+  border-radius: 8px;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+.btn-eliminar:hover {
   cursor: pointer;
 }
 .button {

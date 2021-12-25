@@ -1,8 +1,6 @@
 import React, {useContext} from 'react';
 import {Link} from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.css';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown'
+
 //Context
 import ProductosContext from '../../context/productos/productosContext';
 
@@ -10,14 +8,17 @@ const Producto = ({producto}) => {
     const {idproducto, nombre_producto, precio_producto, categoria_producto} = producto
     //Extraer productos
     const productosContext = useContext(ProductosContext);
-    const {eliminarProducto} = productosContext;
+    const {eliminarProducto,guardarProductoModificado} = productosContext;
     return ( 
         <tr>
             <td>{nombre_producto}</td>
             <td><span className="font-weight-bold"> $ {precio_producto} </span></td>
             <td>{categoria_producto}</td>
             <td className="acciones">
-                <Link to={`./productos/editar`} className="btn btn-primary mr-2"
+                <Link to={`/productos/editar`} 
+                className="btn btn-secondary mr-2"
+                
+                onClick={() => guardarProductoModificado(producto)}
                 >Editar</Link>
                 <button
                     type="button"

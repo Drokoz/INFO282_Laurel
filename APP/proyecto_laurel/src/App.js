@@ -15,10 +15,13 @@ import RutaPrivada from './components/rutas/RutaPrivada';
 //Admin
 import NuevoUsuarioAdmin from './components_administrador/auth/NuevoUsuarioAdmin';
 import PrincipalAdmin from './components_administrador/PrincipalAdmin';
-import ListadoPedidosAdmin_Cocina from './components_administrador/pedidos.js/ListadoPedidosAdmin';
+import ListadoPedidosAdmin from './components_administrador/pedidos/ListadoPedidosAdmin';
+
 //Meseros
 import MenuMeseros from './components_meseros/pedidos/MenuMeseros';
 
+//Bartender Cocina
+import ListadoPedidosCocinaBartender from './components_cocineros_bartender/ListadoPedidosCocinaBartender'
 //Context
 import ProductoState from './context/productos/productosState';
 import AlertaState from './context/alertas/alertaState';
@@ -46,12 +49,15 @@ function App() {
 
                       <RutaPrivada exact path="/admin/menu" component={PrincipalAdmin} />
                       <Route exact path="/admin/usuario/nuevo"component={NuevoUsuarioAdmin} />
-                      <Route exact path="/admin/listado/mesas"component={ListadoPedidosAdmin_Cocina} />
+                      <Route exact path="/admin/listado/mesas"component={ListadoPedidosAdmin} />
+
                       <Route exact path="/meseros/menu"component={MenuMeseros} />
 
                       <RutaPrivada exact path="/productos/listado" component={ListadoProductos} />
                       <RutaPrivada exact path="/productos/nuevo" component={NuevoProducto} />
                       <RutaPrivada exact path="/productos/editar" component={EditarProducto} />
+
+                      <Route exact path="/cb/listado/pedido"component={ListadoPedidosCocinaBartender} />
                     </Switch>
                 </Router>
               </PedidoState>

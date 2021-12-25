@@ -8,6 +8,7 @@ router.get('/obtener',
 [
 
 ],
+    auth,
     mesaControler.obtenerMesas
 );
 

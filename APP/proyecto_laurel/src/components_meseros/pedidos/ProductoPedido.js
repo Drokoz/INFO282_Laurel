@@ -15,7 +15,7 @@ const ProductoPedido = ({producto}) => {
             <td>{comentariosProducto}</td>
             <td><button
                         type="button"
-                        className="btn btn-danger"
+                        className="btn-eliminar btn-danger"
                         onClick = {() => {eliminarProductoPedido(producto)}}
                         >-
                 </button>

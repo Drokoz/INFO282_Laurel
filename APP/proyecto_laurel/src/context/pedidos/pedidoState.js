@@ -55,7 +55,7 @@ const PedidoState = props => {
                 const comentarios = producto.comentariosProducto + productoPedido.comentariosProducto;
                 producto.cantidadProducto = cantidad_total;
                 producto.comentariosProducto = comentarios;
-                const respuesta = await clienteAxios.put("/api/pedidos/modificar",producto);
+                await clienteAxios.put("/api/pedidos/modificar",producto);
             }
             else{
                 const json_producto = {
@@ -90,7 +90,7 @@ const PedidoState = props => {
                 }
                 else{
                     productoPedido.cantidadProducto = cantidad_total;
-                    const respuesta = await clienteAxios.put("/api/pedidos/modificar",productoPedido);
+                    await clienteAxios.put("/api/pedidos/modificar",productoPedido);
                 }
             }
             else{

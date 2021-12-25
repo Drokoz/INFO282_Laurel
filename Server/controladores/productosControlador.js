@@ -33,7 +33,7 @@ exports.obtenerProductos = (req, res) => {
     password: "T^KppimYHbgP9o$$",
     database: "LaurelAppDB",
     insecureAuth: "True"
-});
+  });
 
 
     db.query("SELECT * FROM producto", (err, result) => {
@@ -43,7 +43,7 @@ exports.obtenerProductos = (req, res) => {
         res.send(result);
       }
     });
-  }
+}
 
 
   exports.eliminarProducto = (req, res) => {
@@ -98,4 +98,34 @@ exports.obtenerProductosID = async (req, res) => {
   } catch (error) {
       console.log(error);
   }
+}
+
+
+exports.modificarProducto = (req,res) => {
+  const db = mysql.createPool({
+      host: "localhost",
+      user: "root",
+      password: "T^KppimYHbgP9o$$",
+      database: "LaurelAppDB",
+      insecureAuth: "True"
+  });
+  console.log("En modificar producto");
+  console.log(req.body);
+  const idProducto = req.body.idProducto
+  const nombreProducto = req.body.nombreProducto
+  const precioProducto = parseInt(req.body.precioProducto)
+  const categoriaProducto = req.body.categoriaProducto
+  console.log(idProducto,nombreProducto,nombreProducto,categoriaProducto);
+  const sqlModificar = "UPDATE `producto` SET `nombre_producto` = (?), `precio_producto` = (?), `categoria_producto` = (?) WHERE (`idproducto` = (?));"
+
+  db.query(sqlModificar, [nombreProducto, precioProducto,categoriaProducto, idProducto],
+      function(err,row,fields) {
+          if(err) {
+              console.log(err);
+          }
+          else{
+              res.send("Modificado")
+          }
+      });
+    
 }

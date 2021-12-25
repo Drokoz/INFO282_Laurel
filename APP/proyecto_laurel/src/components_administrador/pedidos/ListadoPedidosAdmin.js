@@ -7,7 +7,7 @@ import MesaContext from "../../context/mesas/mesaContext";
 import MesaAdmin from "./MesaAdmin";
 import SideBar from "../navegacion/Sidebar";
 
-const ListadoPedidosAdmin_Cocina = () => {
+const ListadoPedidosAdmin= () => {
     const mesaContext = useContext(MesaContext);
     const {mesas, obtenerMesas} = mesaContext;
 
@@ -36,4 +36,4 @@ const ListadoPedidosAdmin_Cocina = () => {
      );
 }
  
-export default ListadoPedidosAdmin_Cocina;
+export default ListadoPedidosAdmin;

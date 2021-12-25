@@ -34,4 +34,12 @@ router.delete('/eliminar/:id',
     auth,
     productoControlador.eliminarProducto
 );
+
+router.put('/modificar',
+[
+
+],
+    auth,
+    productoControlador.modificarProducto
+);
 module.exports = router;

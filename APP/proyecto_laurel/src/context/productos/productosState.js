@@ -1,7 +1,7 @@
 import React, { useReducer} from 'react';
 import productosContext from './productosContext'
 import productosReducer from './productosReducer';
-import {OBTENER_PRODUCTO, ELIMINAR_PRODUCTO} from '../../types/index'
+import {OBTENER_PRODUCTO, ELIMINAR_PRODUCTO,OBTENER_CATEGORIAS,GUARDAR_PRODUCTO_MODIFICADO,MODIFICAR_PRODUCTO} from '../../types/index'
 
 //Extras
 import clienteAxios from '../../config/axios';
@@ -10,7 +10,9 @@ const ProductoState = props => {
     
     const initialState = {
         productos: [],
-        formulario:false
+        categorias:[],
+        productoModificado: null,
+        msg: null
     }
 
     const [state, dispatch] = useReducer(productosReducer,initialState);
@@ -47,6 +49,18 @@ const ProductoState = props => {
             
         }
     }
+    //Modificar producto
+    const modificarProducto = async (producto) => {
+        //Extraer informacion de producto
+        const {idProducto, nombreProducto,precioProducto, categoriaProducto} = producto
+        try {
+            await clienteAxios.put('api/productos/modificar', {idProducto:idProducto, nombreProducto: nombreProducto, precioProducto: precioProducto, categoriaProducto: categoriaProducto});
+            
+        } catch (error) {
+            console.log(error)
+            
+        }
+    }
     //Elimina Producto
     const eliminarProducto = async (idproducto) => {
         try {
@@ -60,14 +74,44 @@ const ProductoState = props => {
         }
         
     }
+    //Obtener Productos
+    const obtenerCategorias = async () =>{
+        try {
+            const respuesta = await clienteAxios.get("/api/categorias/obtener")
+            console.log("Respuesta obtenerCategorias",typeof(respuesta),respuesta.data)
+            dispatch({
+                type:OBTENER_CATEGORIAS,
+                payload:respuesta.data
+            })
+
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+    const guardarProductoModificado = (producto) => {
+        try {
+            dispatch({
+                type:GUARDAR_PRODUCTO_MODIFICADO,
+                payload:producto
+            })
+        } catch (error) {
+            console.log(error)
+            
+        }
+    }
     return(
         <productosContext.Provider
             value={{
-                formulario: state.formulario,
+                categorias: state.categorias,
                 productos: state.productos,
+                productoModificado: state.productoModificado,
                 obtenerProductos,
                 agregarProducto,
-                eliminarProducto
+                eliminarProducto,
+                obtenerCategorias,
+                guardarProductoModificado,
+                modificarProducto
             }}
         >
             {props.children}

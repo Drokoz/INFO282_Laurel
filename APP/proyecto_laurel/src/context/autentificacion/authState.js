@@ -1,4 +1,4 @@
-import { REGISTRO_EXITOSO, REGISTRO_ERROR,OBTENER_USUARIO,LOGIN_EXITOSO,LOGIN_ERROR,CERRAR_SESION } from "../../types";
+import { REGISTRO_EXITOSO, REGISTRO_ERROR,OBTENER_USUARIO,LOGIN_EXITOSO,LOGIN_ERROR,CERRAR_SESION, OBTENER_TIPO_USUARIO} from "../../types";
 
 import React, {useReducer} from "react";
 import authReducer from "./authReducer";
@@ -12,7 +12,8 @@ const AuthState = props => {
         autenticador: null,
         usuario: null,
         mensaje: null,
-        cargando: true
+        cargando: true,
+        tipoUsuarios: []
     }
     
     const [state,dispatch] = useReducer(authReducer, estadoInicial)
@@ -93,7 +94,21 @@ const AuthState = props => {
             })
         }
     }
+    //Obtener Productos
+    const obtenerTipoUsuario = async () =>{
+        try {
+            const respuesta = await clienteAxios.get("/api/tipoUsuario/obtener")
+            console.log("Respuesta obtenerTipoUsuario",typeof(respuesta),respuesta.data)
+            dispatch({
+                type:OBTENER_TIPO_USUARIO,
+                payload:respuesta.data
+            })
 
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
     const cerrarSesion = () => {
         dispatch({
             type: CERRAR_SESION
@@ -107,9 +122,11 @@ const AuthState = props => {
             usuario: state.usuario,
             mensaje: state.mensaje,
             cargando: state.cargando,
+            tipoUsuarios: state.tipoUsuarios,
             registrarUsuario,
             iniciarSesion,
             usuarioAutenticado,
+            obtenerTipoUsuario,
             cerrarSesion
         }}
         >

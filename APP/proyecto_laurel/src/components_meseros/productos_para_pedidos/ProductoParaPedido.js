@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useContext} from 'react';
 
 import PedidoContext from '../../context/pedidos/pedidoContext';
 import MesaContext from '../../context/mesas/mesaContext';
@@ -7,7 +7,7 @@ const ProductoParaPedido = (Producto) => {
     //Context
 
     const pedidoContext = useContext(PedidoContext);
-    const {agregarProductoPedido, otorgarPedido, obtenerProductosPedido} = pedidoContext;
+    const {agregarProductoPedido} = pedidoContext;
 
     const mesaContext = useContext(MesaContext);
     const {mesa} = mesaContext;
@@ -20,11 +20,8 @@ const ProductoParaPedido = (Producto) => {
         e.preventDefault();
         //Validar
         let cantidadEntrega = ''
-        if(cantidadProducto.trim() == ''){
-            
-            console.log("en on click producto");
+        if(cantidadProducto.trim() === ''){
             cantidadEntrega = "1"
-            
         }
         else{
             cantidadEntrega = cantidadProducto

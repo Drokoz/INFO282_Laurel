@@ -1,6 +1,6 @@
 
 
-import {OBTENER_PRODUCTO, ELIMINAR_PRODUCTO} from '../../types/index'
+import {OBTENER_PRODUCTO, ELIMINAR_PRODUCTO,OBTENER_CATEGORIAS,GUARDAR_PRODUCTO_MODIFICADO,MODIFICAR_PRODUCTO} from '../../types/index'
 
 
 export default (state, action) => {
@@ -21,10 +21,25 @@ export default (state, action) => {
                         return 1;
                     })
             }
+        case OBTENER_CATEGORIAS:
+            return{
+                ...state,
+                categorias:action.payload
+            }
         case ELIMINAR_PRODUCTO:
             return{
                 ...state,
                 productos: state.productos.filter(producto => producto.idproducto !== action.payload)
+            }
+        case GUARDAR_PRODUCTO_MODIFICADO:
+            return{
+                ...state,
+                productoModificado: action.payload
+            }
+        case MODIFICAR_PRODUCTO:
+            return{
+                ...state,
+                msg: action.payload
             }
         default:
             break;

@@ -1,13 +1,9 @@
-import React, {Fragment, useEffect, useState, useContext} from 'react';
-import { Link } from "react-router-dom";
+import React from 'react';
 
 //Componentes
 import SideBar from '../components_administrador/navegacion/Sidebar';
 import ListadoProductos from '../components_administrador/productos/ListadoProductos'
 
-//Context
-//import ProductosContext from '../../context/productos/productosContext';
-//import AuthContext from '../../context/autentificacion/authContext';
 
 //USAR CONTEXT PARA CONTROLAR QUE COMPONENTE SE UTILIZA O SE MUESTRA EN LA DERECHA
 
