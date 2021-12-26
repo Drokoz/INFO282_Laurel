@@ -18,6 +18,7 @@ const PedidoState = props => {
     //Obtener Productos
     const obtenerProductosPedido = async () => {
         try {
+            console.log("obtenerProductosPedido");
             const respuestaPedidos = (await clienteAxios.get("/api/pedidos/obtener")).data
             const respuestaProductos = (await clienteAxios.get("/api/productos/obtener")).data
             const respuesta = respuestaPedidos.map((pedido) => {
@@ -126,8 +127,13 @@ const PedidoState = props => {
     }
     //Eliminar pedido de mesa
 
-    const eliminarPedido = (id) => {
+    const eliminarPedido = async (id) => {
         try {
+            const productosEliminar = state.pedido.filter(productos => productos.mesaPedido == id);
+            productosEliminar.map(prod => {
+                const id = prod.idpedido;
+                clienteAxios.delete(`/api/pedidos/eliminar/${id}`)
+            });
             dispatch({
                 type: ELIMINAR_PEDIDO,
                 payload: id

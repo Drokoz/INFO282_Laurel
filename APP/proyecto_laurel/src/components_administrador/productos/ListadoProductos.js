@@ -7,7 +7,7 @@ import Producto from './Producto'
 //Context
 import ProductosContext from '../../context/productos/productosContext';
 import AuthContext from '../../context/autentificacion/authContext';
-
+import AlertaContext from '../../context/alertas/alertaContext'
 
 const Productos = () => {
 
@@ -17,16 +17,22 @@ const Productos = () => {
 
     //Extraer productos
     const productosContext = useContext(ProductosContext);
-    const {productos, obtenerProductos} = productosContext;
+    const {productos, obtenerProductos, msg} = productosContext;
 
- 
+    
+    const alertaContext = useContext(AlertaContext);
+    const {alerta, mostrarAlerta} = alertaContext;
 
     useEffect( () => {
         obtenerProductos();
         usuarioAutenticado();
-    },[]);
+        if(msg){
+            mostrarAlerta(msg.msg, msg.categoria);
+        }
+    },[msg]);
     return (
         <div>
+            {alerta ? (<div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div>) : null}
         <Fragment>
             
             <h2 className="text-center my-5">

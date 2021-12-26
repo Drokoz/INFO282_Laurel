@@ -1,7 +1,7 @@
 import React, { useReducer} from 'react';
 import productosContext from './productosContext'
 import productosReducer from './productosReducer';
-import {OBTENER_PRODUCTO, ELIMINAR_PRODUCTO,OBTENER_CATEGORIAS,GUARDAR_PRODUCTO_MODIFICADO,MODIFICAR_PRODUCTO} from '../../types/index'
+import {OBTENER_PRODUCTO, ELIMINAR_PRODUCTO,OBTENER_CATEGORIAS,GUARDAR_PRODUCTO_MODIFICADO,MODIFICAR_PRODUCTO,ERROR_ELIMINAR_PRODUCTO} from '../../types/index'
 
 //Extras
 import clienteAxios from '../../config/axios';
@@ -64,11 +64,21 @@ const ProductoState = props => {
     //Elimina Producto
     const eliminarProducto = async (idproducto) => {
         try {
-            await clienteAxios.delete(`/api/productos/eliminar/${idproducto}`);
-            dispatch({
-                type: ELIMINAR_PRODUCTO,
-                payload: idproducto
-            })
+            const respuesta = await clienteAxios.delete(`/api/productos/eliminar/${idproducto}`);
+            
+            console.log(respuesta);
+            if(respuesta.data.error === 1451){
+                console.log("ELIMINAR PRODUCTO RESPUESTA")
+                dispatch({
+                    type: ERROR_ELIMINAR_PRODUCTO,
+                    payload: {msg: "Error a eliminar, todavía tiene pedidos con ese producto", categoria:'alerta-error'}
+                })
+            }
+            else{
+                dispatch({
+                    type: ELIMINAR_PRODUCTO,
+                    payload: idproducto
+            })}
         } catch (error) {
             console.log(error);
         }
@@ -106,6 +116,7 @@ const ProductoState = props => {
                 categorias: state.categorias,
                 productos: state.productos,
                 productoModificado: state.productoModificado,
+                msg: state.msg,
                 obtenerProductos,
                 agregarProducto,
                 eliminarProducto,

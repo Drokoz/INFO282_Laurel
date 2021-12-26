@@ -12,12 +12,13 @@ const MesaAdmin = (mesas) => {
     const pedidoContext = useContext(PedidoContext);
     const { obtenerProductosPedido, pedido} = pedidoContext;
     
+    console.log("Pedido",pedido)
     useEffect(() => {
-        console.log(pedido.length)
+        console.log("Pedido",pedido)
         if(pedido.length === 0){
-            obtenerProductosPedido()
+            obtenerProductosPedido();
         }
-    },[pedido])
+    },[]);
     return (
         
             <Accordion>
@@ -30,8 +31,9 @@ const MesaAdmin = (mesas) => {
                                     <ListadoMesasMiddle Productos={pedido.filter(productos => productos.mesaPedido === mesa.id)}/>
                             </Accordion.Body>
                         </Accordion.Item>
-                ))
-                ): null   }
+                    ))
+                    ): <h2> No hay pedido hasta el momento </h2>
+}
         </Accordion>
         
      );

@@ -61,10 +61,10 @@ exports.obtenerProductos = (req, res) => {
     db.query(sqlDelete, [id],
     function(err,row,fields) { 
         if(err) {
-          console.log(err);
+          res.json({error:err.errno});
         }
         else{
-            res.send("Eliminado")
+            res.send("Eliminado");
         }
      });
 
@@ -109,6 +109,7 @@ exports.modificarProducto = (req,res) => {
       database: "LaurelAppDB",
       insecureAuth: "True"
   });
+  try{
   console.log("En modificar producto");
   console.log(req.body);
   const idProducto = req.body.idProducto
@@ -120,12 +121,18 @@ exports.modificarProducto = (req,res) => {
 
   db.query(sqlModificar, [nombreProducto, precioProducto,categoriaProducto, idProducto],
       function(err,row,fields) {
+        console.log(err);
           if(err) {
+            console("EN ERROR MODIFICAR")
               console.log(err);
           }
           else{
               res.send("Modificado")
           }
       });
-    
+    }
+      catch (error) {
+        console("EN ERROR MODIFICAR")
+        console.log(error);
+    }
 }

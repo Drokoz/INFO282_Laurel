@@ -1,6 +1,8 @@
 
 
-import {OBTENER_PRODUCTO, ELIMINAR_PRODUCTO,OBTENER_CATEGORIAS,GUARDAR_PRODUCTO_MODIFICADO,MODIFICAR_PRODUCTO} from '../../types/index'
+import {OBTENER_PRODUCTO, ELIMINAR_PRODUCTO,
+        OBTENER_CATEGORIAS,GUARDAR_PRODUCTO_MODIFICADO,
+        MODIFICAR_PRODUCTO,ERROR_ELIMINAR_PRODUCTO} from '../../types/index'
 
 
 export default (state, action) => {
@@ -40,6 +42,11 @@ export default (state, action) => {
             return{
                 ...state,
                 msg: action.payload
+            }
+        case ERROR_ELIMINAR_PRODUCTO:
+            return{
+                ...state,
+                msg:action.payload
             }
         default:
             break;

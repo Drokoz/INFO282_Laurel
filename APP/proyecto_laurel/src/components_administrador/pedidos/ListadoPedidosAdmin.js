@@ -12,7 +12,7 @@ const ListadoPedidosAdmin= () => {
     const {mesas, obtenerMesas} = mesaContext;
 
     useEffect( () => {
-        obtenerMesas();
+        if(Object.keys(mesas).length === 0) obtenerMesas();
     },[])
     return (
         <div className='contenedor-app'>

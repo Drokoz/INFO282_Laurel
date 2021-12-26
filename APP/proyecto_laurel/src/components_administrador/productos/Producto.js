@@ -1,16 +1,23 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 
 //Context
 import ProductosContext from '../../context/productos/productosContext';
 
 const Producto = ({producto}) => {
+
+    //Extraer información de producto
     const {idproducto, nombre_producto, precio_producto, categoria_producto} = producto
-    //Extraer productos
+    
+    //Context
     const productosContext = useContext(ProductosContext);
-    const {eliminarProducto,guardarProductoModificado} = productosContext;
-    return ( 
+    const {eliminarProducto,guardarProductoModificado, msg} = productosContext;
+
+    
+    return (
+        
         <tr>
+            
             <td>{nombre_producto}</td>
             <td><span className="font-weight-bold"> $ {precio_producto} </span></td>
             <td>{categoria_producto}</td>

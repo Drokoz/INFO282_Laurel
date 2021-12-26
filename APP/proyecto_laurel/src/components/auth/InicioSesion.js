@@ -8,6 +8,7 @@ const InicioSesion = (props) => {
         //extraer valores
     const alertaContext = useContext(AlertaContext);
     const {alerta, mostrarAlerta} = alertaContext;
+    
     const authContext = useContext(AuthContext);
     const {mensaje, autenticado, iniciarSesion, usuario} = authContext;
 

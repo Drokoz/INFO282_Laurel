@@ -78,7 +78,9 @@ const NuevoUsuarioAdmin = (props) => {
         });
     };
     useEffect(() => {
-        obtenerTipoUsuario();
+        if (tipoUsuarios.length === 0){
+            obtenerTipoUsuario();
+        }
     }, [])
     return(
         <div className='contenedor-app'>
@@ -147,7 +149,7 @@ const NuevoUsuarioAdmin = (props) => {
                                 onSelect={onSelect}
                                 >
                                 {tipoUsuarios.length === 0 ? null : ( tipoUsuarios.map( tuser => 
-                                    <Dropdown.Item eventKey={tuser.tipo_usuario} name='tipo_usuario'>{(tuser.tipo_usuario[0].toUpperCase() + tuser.tipo_usuario.substring(1))}</Dropdown.Item>
+                                    <Dropdown.Item eventKey={tuser.tipo_usuario} key={tuser.tipo_usuario} name='tipo_usuario'>{(tuser.tipo_usuario[0].toUpperCase() + tuser.tipo_usuario.substring(1))}</Dropdown.Item>
                                 
                                 )
                                 )}

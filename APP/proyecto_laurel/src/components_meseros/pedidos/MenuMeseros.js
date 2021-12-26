@@ -35,7 +35,6 @@ const MenuMeseros = () => {
                 </div>
                 <ListadoPedido/>
             </aside>
-           
             <div className='container'>
                     <div>
                         <h2>Tus mesas</h2>
@@ -45,7 +44,6 @@ const MenuMeseros = () => {
                         <h2>Productos</h2>
                         <ListadoProductosParaPedido/>
                     </div>
-                
             </div>
         </div>
      );
