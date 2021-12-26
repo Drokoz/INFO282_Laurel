@@ -1,9 +1,16 @@
 import React, {useState, useContext, useEffect} from 'react';
+
+//Componentes
 import SideBar from '../navegacion/Sidebar';
-import ProductosContext from '../../context/productos/productosContext';
+
+//Dropdown
 import 'bootstrap/dist/css/bootstrap.css';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
+
+//Context
+import ProductosContext from '../../context/productos/productosContext';
+import AlertaContext from '../../context/alertas/alertaContext'
 
 const EditarProducto = () => {
     const [nombreProducto, setNombreProducto] = useState("");
@@ -11,8 +18,11 @@ const EditarProducto = () => {
     const [categoriaProducto, setCategoriaProducto] = useState("");
     //Extraer productos
     const productosContext = useContext(ProductosContext);
-    const {modificarProducto, categorias, obtenerCategorias, productoModificado} = productosContext;
+    const {modificarProducto, categorias, obtenerCategorias, productoModificado, msg} = productosContext;
 
+    //Alertas
+    const alertaContext = useContext(AlertaContext);
+    const {alerta, mostrarAlerta} = alertaContext;
     const onClickProducto = e => {
 
         e.preventDefault();
@@ -29,7 +39,7 @@ const EditarProducto = () => {
             nombreProducto: nombreProducto,
             precioProducto: precioProducto,
             categoriaProducto: categoriaProducto});
-
+        
     };
 
     const onSelect = (eventKey,e) => {
@@ -49,17 +59,24 @@ const EditarProducto = () => {
             setPrecioProducto(productoModificado.precio_producto.toString())
             console.log(productoModificado)
         }
-    },[])
+        if(msg){
+            console.log(msg)
+            mostrarAlerta(msg.msg, msg.categoria);
+        }
+    },[msg])
     return (
         
         <div className='contenedor-app'>
             <SideBar/>
+            
             <div className='seccion-principal'>
                 <div className="card">
                     <div className="card-body">
+                        
                         <h2 className="text-center mb-4 font-weight-bold">
                            Editar Producto
                         </h2>
+                        {alerta ? (<div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div>) : null}
                         {productoModificado ? <form>
                             <div className="form-group">
                                 <label> Nombre Producto</label>

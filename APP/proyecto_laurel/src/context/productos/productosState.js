@@ -54,11 +54,19 @@ const ProductoState = props => {
         //Extraer informacion de producto
         const {idProducto, nombreProducto,precioProducto, categoriaProducto} = producto
         try {
-            await clienteAxios.put('api/productos/modificar', {idProducto:idProducto, nombreProducto: nombreProducto, precioProducto: precioProducto, categoriaProducto: categoriaProducto});
+            const respuesta = await clienteAxios.put('api/productos/modificar', {idProducto:idProducto, nombreProducto: nombreProducto, precioProducto: precioProducto, categoriaProducto: categoriaProducto});
+            console.log(respuesta)
+            dispatch({
+                type:MODIFICAR_PRODUCTO,
+                payload: {msg: "Producto modificado Correctamente", categoria:'alerta-ok'}
+            })
             
         } catch (error) {
             console.log(error)
-            
+            dispatch({
+                type:MODIFICAR_PRODUCTO,
+                payload: {msg: "Error al modificar producto", categoria:'alerta-error'}
+            })
         }
     }
     //Elimina Producto

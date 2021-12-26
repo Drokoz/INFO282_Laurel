@@ -19,7 +19,7 @@ const Productos = () => {
     const productosContext = useContext(ProductosContext);
     const {productos, obtenerProductos, msg} = productosContext;
 
-    
+    //Alertas
     const alertaContext = useContext(AlertaContext);
     const {alerta, mostrarAlerta} = alertaContext;
 
