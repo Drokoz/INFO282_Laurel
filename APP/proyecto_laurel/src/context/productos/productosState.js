@@ -1,7 +1,11 @@
 import React, { useReducer} from 'react';
 import productosContext from './productosContext'
 import productosReducer from './productosReducer';
-import {OBTENER_PRODUCTO, ELIMINAR_PRODUCTO,OBTENER_CATEGORIAS,GUARDAR_PRODUCTO_MODIFICADO,MODIFICAR_PRODUCTO,ERROR_ELIMINAR_PRODUCTO} from '../../types/index'
+import {AGREGAR_PRODUCTO,OBTENER_PRODUCTO, ELIMINAR_PRODUCTO,
+        OBTENER_CATEGORIAS,GUARDAR_PRODUCTO_MODIFICADO,
+        MODIFICAR_PRODUCTO_EXITOSO,ERROR_ELIMINAR_PRODUCTO,
+        CAMBIAR_ALERTA, MODIFICAR_PRODUCTO_ERROR
+    } from '../../types/index'
 
 //Extras
 import clienteAxios from '../../config/axios';
@@ -43,10 +47,15 @@ const ProductoState = props => {
         const {nombreProducto,precioProducto, categoriaProducto} = producto
         try {
             await clienteAxios.post('api/productos/nuevo', {nombreProducto: nombreProducto, precioProducto: precioProducto, categoriaProducto: categoriaProducto});
-            
+            dispatch({
+                type:AGREGAR_PRODUCTO,
+                payload: {msg: "Producto agregado Correctamente", categoria:'alerta-ok'}
+            })
         } catch (error) {
-            console.log(error)
-            
+            dispatch({
+                type:AGREGAR_PRODUCTO,
+                payload: {msg: "Error al agregar producto", categoria:'alerta-error'}
+            })
         }
     }
     //Modificar producto
@@ -57,14 +66,14 @@ const ProductoState = props => {
             const respuesta = await clienteAxios.put('api/productos/modificar', {idProducto:idProducto, nombreProducto: nombreProducto, precioProducto: precioProducto, categoriaProducto: categoriaProducto});
             console.log(respuesta)
             dispatch({
-                type:MODIFICAR_PRODUCTO,
+                type:MODIFICAR_PRODUCTO_EXITOSO,
                 payload: {msg: "Producto modificado Correctamente", categoria:'alerta-ok'}
             })
             
         } catch (error) {
             console.log(error)
             dispatch({
-                type:MODIFICAR_PRODUCTO,
+                type:MODIFICAR_PRODUCTO_ERROR,
                 payload: {msg: "Error al modificar producto", categoria:'alerta-error'}
             })
         }
@@ -85,10 +94,14 @@ const ProductoState = props => {
             else{
                 dispatch({
                     type: ELIMINAR_PRODUCTO,
-                    payload: idproducto
+                    payload: {idproducto:idproducto, mensaje: {msg: "Producto eliminado correctamente", categoria:'alerta-ok'}}
             })}
         } catch (error) {
             console.log(error);
+            dispatch({
+                type: ERROR_ELIMINAR_PRODUCTO,
+                payload: {msg: "Error a eliminar", categoria:'alerta-error'}
+            })
         }
         
     }
@@ -107,8 +120,13 @@ const ProductoState = props => {
         }
 
     }
+    //Guarda el producto modifcado para utilizarlo en otro componente
     const guardarProductoModificado = (producto) => {
         try {
+            producto = {
+                ...producto,
+                entrando:true
+            }
             dispatch({
                 type:GUARDAR_PRODUCTO_MODIFICADO,
                 payload:producto
@@ -116,6 +134,17 @@ const ProductoState = props => {
         } catch (error) {
             console.log(error)
             
+        }
+    }
+    //Una vez que se muestra el mensaje lo cambiamos a null
+    const msgNull = () => {
+        try {
+            dispatch({
+                type: CAMBIAR_ALERTA,
+                payload: null
+            })
+        } catch (error) {
+            console.log(error)
         }
     }
     return(
@@ -130,7 +159,8 @@ const ProductoState = props => {
                 eliminarProducto,
                 obtenerCategorias,
                 guardarProductoModificado,
-                modificarProducto
+                modificarProducto,
+                msgNull
             }}
         >
             {props.children}

@@ -18,7 +18,7 @@ const EditarProducto = () => {
     const [categoriaProducto, setCategoriaProducto] = useState("");
     //Extraer productos
     const productosContext = useContext(ProductosContext);
-    const {modificarProducto, categorias, obtenerCategorias, productoModificado, msg} = productosContext;
+    const {modificarProducto, categorias, obtenerCategorias, productoModificado, msg, msgNull} = productosContext;
 
     //Alertas
     const alertaContext = useContext(AlertaContext);
@@ -39,7 +39,7 @@ const EditarProducto = () => {
             nombreProducto: nombreProducto,
             precioProducto: precioProducto,
             categoriaProducto: categoriaProducto});
-        
+        productoModificado.entrando = false;
     };
 
     const onSelect = (eventKey,e) => {
@@ -54,14 +54,17 @@ const EditarProducto = () => {
             obtenerCategorias() }
 
         if(productoModificado){
-            setCategoriaProducto(productoModificado.categoria_producto);
-            setNombreProducto(productoModificado.nombre_producto);
-            setPrecioProducto(productoModificado.precio_producto.toString())
-            console.log(productoModificado)
+            if(productoModificado.entrando){
+                setCategoriaProducto(productoModificado.categoria_producto);
+                setNombreProducto(productoModificado.nombre_producto);
+                setPrecioProducto(productoModificado.precio_producto.toString())
+                console.log(productoModificado)
+            }
         }
         if(msg){
             console.log(msg)
             mostrarAlerta(msg.msg, msg.categoria);
+            msgNull();
         }
     },[msg])
     return (

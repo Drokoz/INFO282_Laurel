@@ -1,4 +1,7 @@
-import { REGISTRO_EXITOSO, REGISTRO_ERROR,OBTENER_USUARIO,LOGIN_EXITOSO,LOGIN_ERROR,CERRAR_SESION, OBTENER_TIPO_USUARIO} from "../../types";
+import { REGISTRO_EXITOSO, REGISTRO_ERROR,OBTENER_USUARIO,
+        LOGIN_EXITOSO,LOGIN_ERROR,CERRAR_SESION,
+        OBTENER_TIPO_USUARIO,CAMBIAR_ALERTA_AUTH,
+        NUEVO_USUARIO} from "../../types";
 
 import React, {useReducer} from "react";
 import authReducer from "./authReducer";
@@ -23,13 +26,26 @@ const AuthState = props => {
     const registrarUsuario = async datos =>{
         try {
             const respuesta = await clienteAxios.post('/api/usuarios/crear', datos);
-            console.log(respuesta)
-            dispatch({
-                type: REGISTRO_EXITOSO,
-                payload: respuesta.data
-            })
-
-            usuarioAutenticado();
+            console.log("En registrar");
+            console.log(datos.inicio);
+            if (datos.inicio){
+                dispatch({
+                    type: REGISTRO_EXITOSO,
+                    payload: respuesta.data
+                    
+                })
+                usuarioAutenticado();
+            }
+            else{
+                dispatch({
+                    type: NUEVO_USUARIO,
+                    payload:{msg: "Usuario creado correctamente", categoria:"alerta-ok"}
+                    
+                })
+                
+            }
+            
+            
         } catch (error){
             const alerta = {
                 msg: error.response.data.msg,
@@ -109,10 +125,24 @@ const AuthState = props => {
         }
 
     }
+
+    //Funcion para cerrar sesión
     const cerrarSesion = () => {
         dispatch({
             type: CERRAR_SESION
         })
+    }
+
+    //Funcion para cambiar mensaje a null una vez ya se haya mostrado
+    const mensajeNull = () => {
+        try {
+            dispatch({
+                type: CAMBIAR_ALERTA_AUTH,
+                payload: null
+            })
+        } catch (error) {
+            console.log(error)
+        }
     }
     return(
         <authContext.Provider

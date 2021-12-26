@@ -1,29 +1,48 @@
 import React, {useState, useContext, useEffect} from 'react';
-import ProductosContext from '../../context/productos/productosContext';
-import 'bootstrap/dist/css/bootstrap.css';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown'
+
+//Componentes
 import SideBar from '../navegacion/Sidebar';
 
+//Dropdown
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown'
+import 'bootstrap/dist/css/bootstrap.css';
+
+//Context
+import ProductosContext from '../../context/productos/productosContext';
+import AlertaContext from '../../context/alertas/alertaContext'
+
 const NuevoProducto = () => {
+
+    //Iniciar state para guardar el ingreso de usuario
     const [nombreProducto, setNombreProducto] = useState("");
     const [precioProducto, setPrecioProducto] = useState("");
     const [categoriaProducto, setCategoriaProducto] = useState("");
 
     //Extraer productos
     const productosContext = useContext(ProductosContext);
-    const {agregarProducto, categorias, obtenerCategorias} = productosContext;
+    const {agregarProducto, categorias, obtenerCategorias,msg,msgNull} = productosContext;
 
-    
+    //Alertas
+    const alertaContext = useContext(AlertaContext);
+    const {alerta, mostrarAlerta} = alertaContext;    
+
+    //Función que maneja cuando el usuario hace click en agregar
     const onClickProducto = e => {
 
         e.preventDefault();
 
         //Validar
         if(nombreProducto.trim() === '' || precioProducto.trim() === '' || categoriaProducto.trim() === ''){
+            mostrarAlerta('Todos los campos son obligatorios','alerta-error');
             return;
         };
 
+
+        if(parseInt(precioProducto) < 1){
+            mostrarAlerta('El precio del product debe ser mayor a 0','alerta-error');
+            return;
+        };
         //Pasar a state
 
         agregarProducto({nombreProducto: nombreProducto,
@@ -38,17 +57,23 @@ const NuevoProducto = () => {
 
     };
 
+    //Funcion que maneja la selección en elementos del dropdown
     const onSelect = (eventKey,e) => {
         
         console.log(e.target.name, eventKey)
         setCategoriaProducto( eventKey); 
     }
 
+    //useEffect para obtener cambios de state o props, también al ejecutar el inicio
     useEffect(()=>{
         console.log(categorias)
         if(categorias.length === 0){
             obtenerCategorias() }
-    },[])
+        if(msg){
+            mostrarAlerta(msg.msg, msg.categoria);
+            msgNull();
+        }
+    },[msg])
     return (
         
         <div className='contenedor-app'>
@@ -59,6 +84,7 @@ const NuevoProducto = () => {
                         <h2 className="text-center mb-4 font-weight-bold">
                             Nuevo Producto
                         </h2>
+                        {alerta ? (<div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div>) : null}
                         <form>
                             <div className="form-group">
                                 <label> Nombre Producto</label>

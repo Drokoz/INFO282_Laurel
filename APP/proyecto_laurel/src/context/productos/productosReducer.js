@@ -2,13 +2,15 @@
 
 import {OBTENER_PRODUCTO, ELIMINAR_PRODUCTO,
         OBTENER_CATEGORIAS,GUARDAR_PRODUCTO_MODIFICADO,
-        MODIFICAR_PRODUCTO,ERROR_ELIMINAR_PRODUCTO} from '../../types/index'
+        MODIFICAR_PRODUCTO_EXITOSO,ERROR_ELIMINAR_PRODUCTO,
+        AGREGAR_PRODUCTO,CAMBIAR_ALERTA, MODIFICAR_PRODUCTO_ERROR}
+        from '../../types/index'
 
 
 export default (state, action) => {
     switch (action.type) {
         case OBTENER_PRODUCTO:
-            console.log("En OBTENER_PRODUCTOS",action.payload)
+            //console.log("En OBTENER_PRODUCTOS",action.payload)
             return{
                 ...state,
                 productos: action.payload.sort((producto_A, producto_B) => {
@@ -29,16 +31,33 @@ export default (state, action) => {
                 categorias:action.payload
             }
         case ELIMINAR_PRODUCTO:
+            console.log(action.payload)
             return{
                 ...state,
-                productos: state.productos.filter(producto => producto.idproducto !== action.payload)
+                productos: state.productos.filter(producto => producto.idproducto !== action.payload.idproducto),
+                msg: action.payload.mensaje
             }
         case GUARDAR_PRODUCTO_MODIFICADO:
             return{
                 ...state,
                 productoModificado: action.payload
             }
-        case MODIFICAR_PRODUCTO:
+        case MODIFICAR_PRODUCTO_EXITOSO:
+            return{
+                ...state,
+                msg: action.payload
+            }
+            case MODIFICAR_PRODUCTO_ERROR:
+                return{
+                    ...state,
+                    msg: action.payload
+                }
+        case AGREGAR_PRODUCTO:
+            return{
+                ...state,
+                msg: action.payload
+            }
+        case CAMBIAR_ALERTA:
             return{
                 ...state,
                 msg: action.payload

@@ -5,7 +5,7 @@ import AuthContext from '../../context/autentificacion/authContext'
 
 const InicioSesion = (props) => {
 
-        //extraer valores
+    //extraer valores
     const alertaContext = useContext(AlertaContext);
     const {alerta, mostrarAlerta} = alertaContext;
     

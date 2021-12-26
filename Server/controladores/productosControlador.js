@@ -26,7 +26,27 @@ exports.crearProducto = (req,res) => {
     
 }
 
-exports.obtenerProductos = (req, res) => {
+  exports.obtenerProductos = (req, res) => {
+    const db = mysql.createPool({
+      host: "localhost",
+      user: "root",
+      password: "T^KppimYHbgP9o$$",
+      database: "LaurelAppDB",
+      insecureAuth: "True"
+    });
+
+
+      db.query("SELECT * FROM producto", (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.send(result);
+        }
+      });
+  }
+
+
+  exports.eliminarProducto = (req, res) => {
   const db = mysql.createPool({
     host: "localhost",
     user: "root",
@@ -35,40 +55,19 @@ exports.obtenerProductos = (req, res) => {
     insecureAuth: "True"
   });
 
+  const id = req.params.id;
+  const sqlDelete = "DELETE FROM producto WHERE idproducto = (?);"
 
-    db.query("SELECT * FROM producto", (err, result) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.send(result);
+  db.query(sqlDelete, [id],
+  function(err,row,fields) { 
+      if(err) {
+        res.json({error:err.errno});
+      }
+      else{
+          res.send("Eliminado");
       }
     });
-}
-
-
-  exports.eliminarProducto = (req, res) => {
-    const db = mysql.createPool({
-      host: "localhost",
-      user: "root",
-      password: "T^KppimYHbgP9o$$",
-      database: "LaurelAppDB",
-      insecureAuth: "True"
-  });
-
-    const id = req.params.id;
-    const sqlDelete = "DELETE FROM producto WHERE idproducto = (?);"
-    
-    db.query(sqlDelete, [id],
-    function(err,row,fields) { 
-        if(err) {
-          res.json({error:err.errno});
-        }
-        else{
-            res.send("Eliminado");
-        }
-     });
-
-}
+  }
 
 exports.obtenerProductosID = async (req, res) => {
   const db = mysql.createPool({

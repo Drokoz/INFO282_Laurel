@@ -17,9 +17,9 @@ const Productos = () => {
 
     //Extraer productos
     const productosContext = useContext(ProductosContext);
-    const {productos, obtenerProductos, msg} = productosContext;
+    const {productos, obtenerProductos, msg, msgNull} = productosContext;
 
-    //Alertas
+    
     const alertaContext = useContext(AlertaContext);
     const {alerta, mostrarAlerta} = alertaContext;
 
@@ -28,6 +28,7 @@ const Productos = () => {
         usuarioAutenticado();
         if(msg){
             mostrarAlerta(msg.msg, msg.categoria);
+            msgNull();
         }
     },[msg]);
     return (

@@ -1,18 +1,23 @@
 import React, {useContext, useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
-import AlertaContext from '../../context/alertas/alertaContext'
-import AuthContext from '../../context/autentificacion/authContext'
+
+//Componentes
+import SideBar from '../navegacion/Sidebar';
+//Dropdown
 import 'bootstrap/dist/css/bootstrap.css';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
-import SideBar from '../navegacion/Sidebar';
 
+//Context
+import AlertaContext from '../../context/alertas/alertaContext'
+import AuthContext from '../../context/autentificacion/authContext'
 const NuevoUsuarioAdmin = (props) => {
 
 
     //extraer valores
     const alertaContext = useContext(AlertaContext);
     const {alerta, mostrarAlerta} = alertaContext;
+
     const authContext = useContext(AuthContext);
     const {mensaje, autenticado, registrarUsuario, tipoUsuarios, obtenerTipoUsuario} = authContext;
 
@@ -62,7 +67,15 @@ const NuevoUsuarioAdmin = (props) => {
             mostrarAlerta('Ambas contraseñas deben ser iguales','alerta-error');
             return;
         }
+
+        //Confirmar una selección de tipo de usuario
+        console.log(tipo_usuario)
+        if(tipo_usuario === 'Tipo de usuario') {
+            mostrarAlerta('Debe seleccionar un tipo de usuario','alerta-error');
+            return;
+        }
         registrarUsuario({
+            inicio:false,
             nombreUsuario: usuario.nombre, 
             correoUsuario: usuario.email,
             contraseñaUsuario: usuario.contraseña,
@@ -81,7 +94,10 @@ const NuevoUsuarioAdmin = (props) => {
         if (tipoUsuarios.length === 0){
             obtenerTipoUsuario();
         }
-    }, [])
+        if(mensaje){
+            mostrarAlerta(mensaje.msg,mensaje.categoria);
+        }
+    }, [mensaje])
     return(
         <div className='contenedor-app'>
             <SideBar/>

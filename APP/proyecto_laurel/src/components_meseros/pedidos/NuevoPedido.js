@@ -53,7 +53,6 @@ const NuevoPedido = () => {
     };
     useEffect( () => {
         obtenerProductos();
-        console.log("productos");
         console.log(productos);
     },[]);
     return ( 

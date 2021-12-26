@@ -31,7 +31,7 @@ const PedidoState = props => {
                     precioProducto: producto.precio_producto,
                     cantidadProducto: pedido.cantidadProducto,
                     comentariosProducto: pedido.comentariosProducto,
-                    mesaPedido : pedido.mesaPedido,
+                    mesaPedido : pedido.mesaPedido
                 }
                 return json_producto;
             }
@@ -51,13 +51,18 @@ const PedidoState = props => {
     const agregarProductoPedido = async (productoPedido) => {
         try {
             const producto = state.pedido.find((prod) => prod.idProducto === productoPedido.idProducto && prod.mesaPedido === productoPedido.mesaPedido);
+            //Si existe lo modificamos
             if(producto !== undefined){
                 const cantidad_total = parseInt(producto.cantidadProducto) + parseInt(productoPedido.cantidadProducto);
-                const comentarios = producto.comentariosProducto + productoPedido.comentariosProducto;
+                let comentarios = producto.comentariosProducto 
+                if (productoPedido.comentariosProducto != ''){
+                    comentarios = producto.comentariosProducto + ', '+ productoPedido.comentariosProducto;
+                }
                 producto.cantidadProducto = cantidad_total;
                 producto.comentariosProducto = comentarios;
                 await clienteAxios.put("/api/pedidos/modificar",producto);
             }
+            //Si no existe lo agregamos
             else{
                 const json_producto = {
                     "idProducto": productoPedido.idProducto,
@@ -84,11 +89,13 @@ const PedidoState = props => {
     const eliminarProductoPedido = async (productoPedido) => {
         try {
             let eliminar = false;
+            //Revisamos cantidad actual
             if(productoPedido.cantidadProducto > 0){
                 const cantidad_total = parseInt(productoPedido.cantidadProducto) - 1;
                 if (cantidad_total === 0){
                     eliminar = true;
                 }
+                //Si la cantidad total nueva no es 0 se modifica
                 else{
                     productoPedido.cantidadProducto = cantidad_total;
                     await clienteAxios.put("/api/pedidos/modificar",productoPedido);
@@ -97,7 +104,7 @@ const PedidoState = props => {
             else{
                 eliminar = true;
             }
-
+            //En caso que haya sido 0 se elimina
             if(eliminar){
                 const id = productoPedido.idpedido
                 await clienteAxios.delete(`/api/pedidos/eliminar/${id}`)

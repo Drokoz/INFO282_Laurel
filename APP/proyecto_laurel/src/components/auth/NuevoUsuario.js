@@ -63,6 +63,7 @@ const NuevoUsuario = (props) => {
             return;
         }
         registrarUsuario({
+            inicio:true,
             nombreUsuario: usuario.nombre, 
             correoUsuario: usuario.email,
             contraseñaUsuario: usuario.contraseña,
