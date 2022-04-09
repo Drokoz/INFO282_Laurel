@@ -19,7 +19,7 @@ Instala las dependencias necesarias para ejecutar el programa
 Inicia la aplicación para el desarrollo de la misma
 Abre [http://localhost:3000](http://localhost:3000) para ver todo.
 
-En la consola sepodrán ver los errores.
+En la consola se podrán ver los errores.
 
 ## Para el Servidor
 
