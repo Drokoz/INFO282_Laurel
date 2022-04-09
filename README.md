@@ -3,7 +3,7 @@
 Este proyecto se trata de una implementación para pedidos de restaurante, se programó y desarrolló para el ramo INFO282 de la carrera Ingenería Civil Informática de la Universidad austral de Chile.
 
 ## Los distintos comandos para poder ejecutarlo son:
-`Asegurarse de tener instalado react`
+`Asegurarse de tener instalado react y MySQL`
 
 ## Para la aplicación
 Si estás en el directerio de la aplicación (INFO282_Laurel/APP/proyecto_laurel)
