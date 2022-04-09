@@ -7,7 +7,7 @@ Asegurarse de tener instalado [npm, react](https://phoenixnap.com/kb/install-nod
 Abre este [Drive](https://drive.google.com/file/d/1o6wBAVanDt8gLrcTynRoBNCmnydRg3xo/view?usp=sharing) para poder descargar las tablas de la base de datos.
 
 ## Para el Servidor
-Si estás en el directerio de la aplicación (INFO282_Laurel/Server)
+Si estás en el directorio de la aplicación (INFO282_Laurel/Server)
 
 ### `npm install dependencies`
 
@@ -31,10 +31,11 @@ Instala las dependencias necesarias para ejecutar el programa
 
 ### `npm start`
 
-Inicia la aplicación para el desarrollo de la misma
+Inicia la aplicación para el desarrollo de la misma.
+
 Abre [http://localhost:3000](http://localhost:3000) para ver todo.
 
 En la consola se podrán ver los errores.
 
 Si lanza error de instalación ERR_OSSL_EVP_UNSUPPORTED recomendamos utilizar este [Link](https://stackoverflow.com/questions/69665222/node-js-17-0-1-gatsby-error-digital-envelope-routinesunsupported-err-os) tal vez sea de ayuda.
-Cualquier comentario o duda puede ser preguntado mediante [correo electrónico](mailto:tomas.herceg@alumnos.uach.cl?subject=[GitHub]%20Laurel%20INFO282)
+Cualquier comentario o duda puede ser preguntado mediante [correo electrónico](mailto:tomas.herceg@alumnos.uach.cl?subject=[GitHub]%20Laurel%20INFO282).
