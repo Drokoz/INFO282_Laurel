@@ -37,4 +37,4 @@ Abre [http://localhost:3000](http://localhost:3000) para ver todo.
 En la consola se podrán ver los errores.
 
 Si lanza error de instalación ERR_OSSL_EVP_UNSUPPORTED recomendamos utilizar este [Link](https://stackoverflow.com/questions/69665222/node-js-17-0-1-gatsby-error-digital-envelope-routinesunsupported-err-os) tal vez sea de ayuda.
-Cualquier comentario o duda puede ser preguntado mediante [correo electrónico](mailto:tomas.herceg@alumnos.uach.cl?subject=[GitHub]%20Source%20Han%20Sans)
+Cualquier comentario o duda puede ser preguntado mediante [correo electrónico](mailto:tomas.herceg@alumnos.uach.cl?subject=[GitHub]%20Laurel%20INFO282)
